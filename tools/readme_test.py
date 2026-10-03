@@ -247,6 +247,24 @@ def run(root, verbose=True):
                  'languages/%s.pot' % SLUG]),
          'readme.txt and the main file are what the reviewer opens')
 
+    # R29: the install instruction now points at a file on GitHub's servers, so the
+    # claim has moved outside this repository the same way the Plugin URI did. dist.json
+    # only proves the zip on this disk matches the files on this disk; it cannot see a
+    # release left as a draft, an upload that never happened, or a zip rebuilt here
+    # afterwards. Only a recorded anonymous download can (tools/check_release_asset.py).
+    try:
+        ra = json.loads(read(root, 'evidence', 'release_asset.json'))
+    except Exception:
+        ra = {}
+    c.ck('R29 the published download was fetched and matches the zip',
+         (ra.get('api_status'), ra.get('draft'), ra.get('prerelease'),
+          ra.get('download_status'), ra.get('downloaded_sha256'), ra.get('tag'),
+          ra.get('tag_commit_status'), ra.get('tag_files_match_zip')),
+         (200, False, False, 200, dist.get('sha256'), 'v%s' % ph.get('Version'), 200, True),
+         'the readme tells people to install from the releases page; '
+         'evidence/release_asset.json has to show a logged out download of that exact '
+         'zip, from a published release whose tag serves the same four files')
+
     c.ck('R23 no em dash in the listing', '—' in readme, False,
          'house style: an em dash is the surface marker we remove everywhere else')
 
@@ -396,6 +414,40 @@ def sab_plugin_uri_unfetched(root):
         os.remove(fp)
 
 
+def sab_release_zip_rebuilt(root):
+    """Rebuild the zip here and forget to upload it, so the download is the old one."""
+    fp = os.path.join(root, 'evidence', 'dist.json')
+    d = json.loads(io.open(fp, encoding='utf-8').read())
+    d['sha256'] = 'f' * 64
+    io.open(fp, 'w', encoding='utf-8').write(json.dumps(d, indent=1))
+
+
+def sab_release_unfetched(root):
+    """Tell people to install from the releases page without ever fetching it."""
+    fp = os.path.join(root, 'evidence', 'release_asset.json')
+    if os.path.exists(fp):
+        os.remove(fp)
+
+
+def sab_release_draft(root):
+    """Leave the release as a draft: it exists for us and 404s for everyone else."""
+    fp = os.path.join(root, 'evidence', 'release_asset.json')
+    d = json.loads(io.open(fp, encoding='utf-8').read())
+    d['draft'] = True
+    io.open(fp, 'w', encoding='utf-8').write(json.dumps(d, indent=1))
+
+
+def sab_release_tag_drift(root):
+    """The tag serves code the shipped zip does not contain."""
+    fp = os.path.join(root, 'evidence', 'release_asset.json')
+    d = json.loads(io.open(fp, encoding='utf-8').read())
+    if d.get('tag_files'):
+        d['tag_files'][0]['sha256'] = '0' * 64
+        d['tag_files'][0]['same_as_zip'] = False
+        d['tag_files_match_zip'] = False
+    io.open(fp, 'w', encoding='utf-8').write(json.dumps(d, indent=1))
+
+
 SABOTAGES = [
     ('S1 stable tag drifts from the version', sab_stable_tag, ['R2 stable tag is the shipped version', 'R9 changelog covers the stable tag']),
     ('S2 tested up to a version never run', sab_tested_up, ['R5 tested up to is the newest version we ran on']),
@@ -412,6 +464,10 @@ SABOTAGES = [
     ('S12 the permission run is thrown away', sab_gate_unproved, ['R27 the faq answer on who can see it was measured']),
     ('S13 the header points at a repository that is not there', sab_plugin_uri_404, ['R28 the plugin uri was opened and answered']),
     ('S14 the url is claimed but never opened', sab_plugin_uri_unfetched, ['R28 the plugin uri was opened and answered']),
+    ('S15 the zip is rebuilt after the release is uploaded', sab_release_zip_rebuilt, ['R29 the published download was fetched and matches the zip']),
+    ('S16 the releases page is cited but never downloaded', sab_release_unfetched, ['R29 the published download was fetched and matches the zip']),
+    ('S17 the release is left as a draft', sab_release_draft, ['R29 the published download was fetched and matches the zip']),
+    ('S18 the tag serves code the zip does not have', sab_release_tag_drift, ['R29 the published download was fetched and matches the zip']),
 ]
 
 

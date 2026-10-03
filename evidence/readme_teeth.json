@@ -1,6 +1,6 @@
 {
- "sabotages": 15,
- "caught": 15,
+ "sabotages": 19,
+ "caught": 19,
  "results": [
   {
    "case": "S1 stable tag drifts from the version",
@@ -163,6 +163,46 @@
    ],
    "expected": [
     "R28 the plugin uri was opened and answered"
+   ],
+   "verdict": "CAUGHT"
+  },
+  {
+   "case": "S15 the zip is rebuilt after the release is uploaded",
+   "failed": [
+    "R29 the published download was fetched and matches the zip"
+   ],
+   "expected": [
+    "R29 the published download was fetched and matches the zip"
+   ],
+   "verdict": "CAUGHT"
+  },
+  {
+   "case": "S16 the releases page is cited but never downloaded",
+   "failed": [
+    "R29 the published download was fetched and matches the zip"
+   ],
+   "expected": [
+    "R29 the published download was fetched and matches the zip"
+   ],
+   "verdict": "CAUGHT"
+  },
+  {
+   "case": "S17 the release is left as a draft",
+   "failed": [
+    "R29 the published download was fetched and matches the zip"
+   ],
+   "expected": [
+    "R29 the published download was fetched and matches the zip"
+   ],
+   "verdict": "CAUGHT"
+  },
+  {
+   "case": "S18 the tag serves code the zip does not have",
+   "failed": [
+    "R29 the published download was fetched and matches the zip"
+   ],
+   "expected": [
+    "R29 the published download was fetched and matches the zip"
    ],
    "verdict": "CAUGHT"
   },

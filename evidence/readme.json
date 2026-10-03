@@ -1,6 +1,6 @@
 {
- "passed": 28,
- "total": 28,
+ "passed": 29,
+ "total": 29,
  "checks": [
   {
    "name": "R1 required headers",
@@ -262,6 +262,31 @@
    ],
    "ok": true,
    "why": "readme.txt and the main file are what the reviewer opens"
+  },
+  {
+   "name": "R29 the published download was fetched and matches the zip",
+   "got": [
+    200,
+    false,
+    false,
+    200,
+    "42c655f52ef4234b276ce321243a223d21e03fae9ebe0fa6aeab81520ac8c8b1",
+    "v1.0.0",
+    200,
+    true
+   ],
+   "want": [
+    200,
+    false,
+    false,
+    200,
+    "42c655f52ef4234b276ce321243a223d21e03fae9ebe0fa6aeab81520ac8c8b1",
+    "v1.0.0",
+    200,
+    true
+   ],
+   "ok": true,
+   "why": "the readme tells people to install from the releases page; evidence/release_asset.json has to show a logged out download of that exact zip, from a published release whose tag serves the same four files"
   },
   {
    "name": "R23 no em dash in the listing",

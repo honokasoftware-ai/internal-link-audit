@@ -18,8 +18,17 @@ Admin screen: **Tools → Internal Link Audit**. Requires the `manage_options` c
 
 ## Install
 
-Download `dist/internal-link-audit-1.0.0.zip` and upload it under
-*Plugins → Add New → Upload Plugin*, or copy `plugin/` into `wp-content/plugins/internal-link-audit/`.
+Download the zip from the [v1.0.0 release](https://github.com/honokasoftware-ai/internal-link-audit/releases/tag/v1.0.0)
+and upload it under *Plugins → Add New → Upload Plugin*, or copy `plugin/` into
+`wp-content/plugins/internal-link-audit/`.
+
+```
+sha256  42c655f52ef4234b276ce321243a223d21e03fae9ebe0fa6aeab81520ac8c8b1
+```
+
+The same file is in `dist/` here. `tools/check_release_asset.py` downloads the published
+one without a token and fails if its hash is not the one above, so the install
+instruction cannot go stale without a check noticing.
 
 Requires WordPress 6.0 or newer and PHP 7.4 or newer. Both ends of that range were run,
 not guessed: see the table below.
@@ -33,8 +42,8 @@ real WordPress in Docker rather than against mocks.
 |---|---|
 | Environments | WordPress **7.1.2** / PHP **8.3.35** and WordPress **6.0.3** / PHP **7.4.32** |
 | Behaviour | **24 / 24** in both (`tools/harness.py`) |
-| The readme's own claims | **28 / 28** (`tools/readme_test.py`) |
-| Sabotage caught | **10 / 10** against the running plugin, **15 / 15** against the readme |
+| The readme's own claims | **29 / 29** (`tools/readme_test.py`) |
+| Sabotage caught | **10 / 10** against the running plugin, **19 / 19** against the readme |
 | Raw records | `evidence/` |
 
 Two rules keep the checks honest:
@@ -48,11 +57,18 @@ Two rules keep the checks honest:
 
 ### What you can re-run from this repository
 
-`python3 tools/readme_test.py` (28 checks) and `python3 tools/readme_test.py --sabotage`
-(15 deliberate breakages, all of which must be caught) run on a clone with nothing but
+`python3 tools/readme_test.py` (29 checks) and `python3 tools/readme_test.py --sabotage`
+(19 deliberate breakages, all of which must be caught) run on a clone with nothing but
 Python 3. So does `python3 tools/check_plugin_uri.py`, which fetches the `Plugin URI` in
 the header and records the status code, because a URL in a header is a claim about
 somewhere else and on 2026-10-03 ours pointed at a repository that returned 404.
+
+`python3 tools/check_release_asset.py` is the same idea one step further out: it asks
+GitHub for the release anonymously, downloads the attached zip, and then fetches each of
+the four shipped files from the `v1.0.0` tag and hashes them against the zip. A release
+left as a draft, a zip rebuilt here after the upload, and a tag serving code the download
+does not contain are all invisible from inside the repository, and a stranger meets each
+of them as a broken promise on this page.
 
 `tools/harness.py` is the one that needs more than a clone: it drives a WordPress and
 MySQL pair in Docker that is **not included here**. What is included is every record it
@@ -93,6 +109,7 @@ Written after reading the Detailed Plugin Guidelines, and each point is asserted
 - The permission measurement covered `editor` and `subscriber`. Other roles, custom
   roles and multisite (where `manage_options` means something different) are untested.
 - It has not been run on a production site yet, and it is not on WordPress.org yet.
+  The release here is the only way to install it today.
 
 ## Licence
 
