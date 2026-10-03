@@ -1,0 +1,176 @@
+{
+ "sabotages": 15,
+ "caught": 15,
+ "results": [
+  {
+   "case": "S1 stable tag drifts from the version",
+   "failed": [
+    "R2 stable tag is the shipped version",
+    "R9 changelog covers the stable tag",
+    "R25 the zip holds the files as they are now"
+   ],
+   "expected": [
+    "R2 stable tag is the shipped version",
+    "R9 changelog covers the stable tag"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S2 tested up to a version never run",
+   "failed": [
+    "R5 tested up to is the newest version we ran on",
+    "R25 the zip holds the files as they are now"
+   ],
+   "expected": [
+    "R5 tested up to is the newest version we ran on"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S3 short description over the limit",
+   "failed": [
+    "R6 short description length",
+    "R25 the zip holds the files as they are now"
+   ],
+   "expected": [
+    "R6 short description length"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S3b a minimum nobody ran",
+   "failed": [
+    "R24 requires at least is the oldest version we ran on",
+    "R25 the zip holds the files as they are now"
+   ],
+   "expected": [
+    "R24 requires at least is the oldest version we ran on"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S4 a sixth tag",
+   "failed": [
+    "R7 at most five tags",
+    "R25 the zip holds the files as they are now"
+   ],
+   "expected": [
+    "R7 at most five tags"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S5 the plugin starts phoning home",
+   "failed": [
+    "R14 the privacy claim holds in the code",
+    "R25 the zip holds the files as they are now"
+   ],
+   "expected": [
+    "R14 the privacy claim holds in the code"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S6 the ceiling changes and the faq does not",
+   "failed": [
+    "R16 post ceiling in the faq",
+    "R25 the zip holds the files as they are now"
+   ],
+   "expected": [
+    "R16 post ceiling in the faq"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S7 the capability is loosened",
+   "failed": [
+    "R19 the capability the faq promises",
+    "R25 the zip holds the files as they are now"
+   ],
+   "expected": [
+    "R19 the capability the faq promises"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S8 a new string never reaches the pot",
+   "failed": [
+    "R21 every translatable string is in the pot",
+    "R25 the zip holds the files as they are now"
+   ],
+   "expected": [
+    "R21 every translatable string is in the pot"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S9b the zip is older than the code",
+   "failed": [
+    "R17 batch size in the installation steps",
+    "R25 the zip holds the files as they are now"
+   ],
+   "expected": [
+    "R25 the zip holds the files as they are now"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S9 the caption miscounts the picture",
+   "failed": [
+    "R13 caption counts the figures that are there",
+    "R25 the zip holds the files as they are now"
+   ],
+   "expected": [
+    "R13 caption counts the figures that are there"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S11 a reader was served the report",
+   "failed": [
+    "R27 the faq answer on who can see it was measured"
+   ],
+   "expected": [
+    "R27 the faq answer on who can see it was measured"
+   ],
+   "verdict": "CAUGHT"
+  },
+  {
+   "case": "S12 the permission run is thrown away",
+   "failed": [
+    "R27 the faq answer on who can see it was measured"
+   ],
+   "expected": [
+    "R27 the faq answer on who can see it was measured"
+   ],
+   "verdict": "CAUGHT"
+  },
+  {
+   "case": "S13 the header points at a repository that is not there",
+   "failed": [
+    "R28 the plugin uri was opened and answered",
+    "R25 the zip holds the files as they are now"
+   ],
+   "expected": [
+    "R28 the plugin uri was opened and answered"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S14 the url is claimed but never opened",
+   "failed": [
+    "R28 the plugin uri was opened and answered"
+   ],
+   "expected": [
+    "R28 the plugin uri was opened and answered"
+   ],
+   "verdict": "CAUGHT"
+  },
+  {
+   "case": "S10 no-op rewrite",
+   "failed": [],
+   "expected": [],
+   "verdict": "QUIET"
+  }
+ ]
+}

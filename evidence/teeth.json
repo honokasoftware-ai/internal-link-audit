@@ -1,0 +1,163 @@
+{
+ "sabotages": 10,
+ "caught": 10,
+ "caught_exactly": 5,
+ "results": [
+  {
+   "case": "S1 a self link rescues the post",
+   "kind": "sabotage",
+   "rounds": 1,
+   "failed": [
+    "V2 orphan count",
+    "V3 orphan list",
+    "V10 self link does not rescue"
+   ],
+   "expected_to_fail": [
+    "V10 self link does not rescue"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S2 HTML comments are counted",
+   "kind": "sabotage",
+   "rounds": 1,
+   "failed": [
+    "V2 orphan count",
+    "V3 orphan list",
+    "V5 internal links total",
+    "V9 HTML comments ignored"
+   ],
+   "expected_to_fail": [
+    "V9 HTML comments ignored"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S3 read stored content, not the rendered page",
+   "kind": "sabotage",
+   "rounds": 1,
+   "failed": [
+    "V2 orphan count",
+    "V3 orphan list",
+    "V4 images",
+    "V5 internal links total",
+    "V7 posts with no link out",
+    "V8 the_content filters ran",
+    "V11 empty alt is not missing",
+    "V12 per row figures"
+   ],
+   "expected_to_fail": [
+    "V8 the_content filters ran"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S4 alt=\"\" is reported as missing",
+   "kind": "sabotage",
+   "rounds": 1,
+   "failed": [
+    "V4 images",
+    "V11 empty alt is not missing"
+   ],
+   "expected_to_fail": [
+    "V4 images",
+    "V11 empty alt is not missing"
+   ],
+   "verdict": "CAUGHT"
+  },
+  {
+   "case": "S5 tel: and mailto: count as internal links",
+   "kind": "sabotage",
+   "rounds": 1,
+   "failed": [
+    "V5 internal links total",
+    "V6 internal links median"
+   ],
+   "expected_to_fail": [
+    "V5 internal links total"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S6 only double quoted href is read",
+   "kind": "sabotage",
+   "rounds": 1,
+   "failed": [
+    "V5 internal links total"
+   ],
+   "expected_to_fail": [
+    "V5 internal links total"
+   ],
+   "verdict": "CAUGHT"
+  },
+  {
+   "case": "S7 pages are scanned as well as posts",
+   "kind": "sabotage",
+   "rounds": 1,
+   "failed": [
+    "V1 posts read",
+    "V2 orphan count",
+    "V3 orphan list",
+    "V5 internal links total",
+    "V7 posts with no link out"
+   ],
+   "expected_to_fail": [
+    "V1 posts read"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S8 the mean is shown where the median is promised",
+   "kind": "sabotage",
+   "rounds": 1,
+   "failed": [
+    "V6 internal links median"
+   ],
+   "expected_to_fail": [
+    "V6 internal links median"
+   ],
+   "verdict": "CAUGHT"
+  },
+  {
+   "case": "S11 the plugin trusts WordPress to have checked the capability",
+   "kind": "sabotage",
+   "rounds": 1,
+   "failed": [
+    "V24 the plugin refuses on its own"
+   ],
+   "expected_to_fail": [
+    "V24 the plugin refuses on its own"
+   ],
+   "verdict": "CAUGHT"
+  },
+  {
+   "case": "S12 the screen is registered at a capability a reader has",
+   "kind": "sabotage",
+   "rounds": 1,
+   "failed": [
+    "V23 the menu item is not shown to them"
+   ],
+   "expected_to_fail": [
+    "V23 the menu item is not shown to them"
+   ],
+   "verdict": "CAUGHT"
+  },
+  {
+   "case": "S9 a rewrite that changes nothing",
+   "kind": "no-op",
+   "rounds": 1,
+   "failed": [],
+   "expected_to_fail": [],
+   "verdict": "NO-OP CONFIRMED"
+  },
+  {
+   "case": "S10 two posts per request instead of a hundred",
+   "kind": "invariance",
+   "rounds": 4,
+   "failed": [],
+   "expected_to_fail": [],
+   "verdict": "HELD",
+   "why": "rounds 4 vs baseline 1, failures []"
+  }
+ ]
+}

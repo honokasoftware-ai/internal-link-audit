@@ -1,0 +1,274 @@
+{
+ "passed": 28,
+ "total": 28,
+ "checks": [
+  {
+   "name": "R1 required headers",
+   "got": [
+    "Contributors",
+    "License",
+    "License URI",
+    "Requires PHP",
+    "Requires at least",
+    "Stable tag",
+    "Tags",
+    "Tested up to"
+   ],
+   "want": [
+    "Contributors",
+    "License",
+    "License URI",
+    "Requires PHP",
+    "Requires at least",
+    "Stable tag",
+    "Tags",
+    "Tested up to"
+   ],
+   "ok": true,
+   "why": "the listing will not build without these"
+  },
+  {
+   "name": "R2 stable tag is the shipped version",
+   "got": "1.0.0",
+   "want": "1.0.0",
+   "ok": true,
+   "why": "a stable tag that is not the version in the file ships the wrong code"
+  },
+  {
+   "name": "R3 requires at least agrees with the code",
+   "got": "6.0",
+   "want": "6.0",
+   "ok": true,
+   "why": "two places state the same minimum"
+  },
+  {
+   "name": "R4 requires php agrees with the code",
+   "got": "7.4",
+   "want": "7.4",
+   "ok": true,
+   "why": "same"
+  },
+  {
+   "name": "R5 tested up to is the newest version we ran on",
+   "got": "7.1",
+   "want": "7.1",
+   "ok": true,
+   "why": "evidence/verify-<version>.json records a full pass on that WordPress"
+  },
+  {
+   "name": "R24 requires at least is the oldest version we ran on",
+   "got": "6.0",
+   "want": "6.0",
+   "ok": true,
+   "why": "a minimum nobody tried is a guess, and this one was run: 24/24 on 6.0.3 with PHP 7.4.32"
+  },
+  {
+   "name": "R6 short description length",
+   "got": true,
+   "want": true,
+   "ok": true,
+   "why": "WordPress.org truncates over 150 characters, and a cut sentence reads as sloppy"
+  },
+  {
+   "name": "R7 at most five tags",
+   "got": true,
+   "want": true,
+   "ok": true,
+   "why": "only the first five are used"
+  },
+  {
+   "name": "R8 required sections",
+   "got": [
+    "Changelog",
+    "Description",
+    "Frequently Asked Questions",
+    "Installation",
+    "Screenshots"
+   ],
+   "want": [
+    "Changelog",
+    "Description",
+    "Frequently Asked Questions",
+    "Installation",
+    "Screenshots"
+   ],
+   "ok": true,
+   "why": "the listing tabs come from these"
+  },
+  {
+   "name": "R9 changelog covers the stable tag",
+   "got": true,
+   "want": true,
+   "ok": true,
+   "why": "a release with no changelog entry"
+  },
+  {
+   "name": "R10 one caption per screenshot file",
+   "got": [
+    1,
+    1
+   ],
+   "want": [
+    1,
+    1
+   ],
+   "ok": true,
+   "why": "an uncaptioned image, or a caption for an image that is not in the zip"
+  },
+  {
+   "name": "R11 the screenshot is the one we took",
+   "got": 200,
+   "want": 200,
+   "ok": true,
+   "why": "the picture came from a real admin screen that answered 200"
+  },
+  {
+   "name": "R12 the screenshot file is the one measured",
+   "got": "screenshot-1.png",
+   "want": "screenshot-1.png",
+   "ok": true,
+   "why": "the recorded hash has to belong to the file that ships"
+  },
+  {
+   "name": "R13 caption counts the figures that are there",
+   "got": 6,
+   "want": 6,
+   "ok": true,
+   "why": "the caption describes the picture, and the picture is the screen"
+  },
+  {
+   "name": "R14 the privacy claim holds in the code",
+   "got": [],
+   "want": [],
+   "ok": true,
+   "why": "guideline 7: the readme says it cannot talk out, so the names must be absent"
+  },
+  {
+   "name": "R15 nothing is for sale in the code",
+   "got": [],
+   "want": [],
+   "ok": true,
+   "why": "guideline 5: the readme says everything is free"
+  },
+  {
+   "name": "R16 post ceiling in the faq",
+   "got": "5,000",
+   "want": "5,000",
+   "ok": true,
+   "why": "the number a buyer plans around"
+  },
+  {
+   "name": "R17 batch size in the installation steps",
+   "got": "100",
+   "want": "100",
+   "ok": true,
+   "why": "same"
+  },
+  {
+   "name": "R18 the stored option is the one named",
+   "got": true,
+   "want": true,
+   "ok": true,
+   "why": "the readme tells people what to delete"
+  },
+  {
+   "name": "R19 the capability the faq promises",
+   "got": "manage_options",
+   "want": "manage_options",
+   "ok": true,
+   "why": "the readme says who can see the report"
+  },
+  {
+   "name": "R27 the faq answer on who can see it was measured",
+   "got": [
+    true,
+    true,
+    [],
+    true,
+    [
+     "plugin"
+    ]
+   ],
+   "want": [
+    true,
+    true,
+    [],
+    true,
+    [
+     "plugin"
+    ]
+   ],
+   "ok": true,
+   "why": "a capability named in the source is not a refusal anyone observed; evidence/verify-<version>.json has to show a logged in non administrator being turned away and the scan not running for them"
+  },
+  {
+   "name": "R28 the plugin uri was opened and answered",
+   "got": [
+    true,
+    "https://github.com/honokasoftware-ai/internal-link-audit",
+    200,
+    true
+   ],
+   "want": [
+    true,
+    "https://github.com/honokasoftware-ai/internal-link-audit",
+    200,
+    true
+   ],
+   "ok": true,
+   "why": "a header url nobody fetched can be a 404; evidence/plugin_uri.json has to show a 200 for this exact url with the repository name in the page"
+  },
+  {
+   "name": "R20 text domain matches the slug",
+   "got": "internal-link-audit",
+   "want": "internal-link-audit",
+   "ok": true,
+   "why": "translations load by slug on WordPress.org"
+  },
+  {
+   "name": "R21 every translatable string is in the pot",
+   "got": [],
+   "want": [],
+   "ok": true,
+   "why": "a string missing from the pot can never be translated"
+  },
+  {
+   "name": "R22 the pot carries the right domain",
+   "got": true,
+   "want": true,
+   "ok": true,
+   "why": "wrong domain in the pot means the translations never load"
+  },
+  {
+   "name": "R25 the zip holds the files as they are now",
+   "got": [],
+   "want": [],
+   "ok": true,
+   "why": "a zip built before the last edit submits code nobody checked"
+  },
+  {
+   "name": "R26 the zip carries the required files",
+   "got": [
+    "internal-link-audit.php",
+    "languages/internal-link-audit.pot",
+    "readme.txt",
+    "uninstall.php"
+   ],
+   "want": [
+    "internal-link-audit.php",
+    "languages/internal-link-audit.pot",
+    "readme.txt",
+    "uninstall.php"
+   ],
+   "ok": true,
+   "why": "readme.txt and the main file are what the reviewer opens"
+  },
+  {
+   "name": "R23 no em dash in the listing",
+   "got": false,
+   "want": false,
+   "ok": true,
+   "why": "house style: an em dash is the surface marker we remove everywhere else"
+  }
+ ]
+}

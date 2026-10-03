@@ -1,0 +1,17 @@
+{
+ "url": "/wp-admin/tools.php?page=internal-link-audit",
+ "status": 200,
+ "file": "assets/screenshot-1.png",
+ "bytes": 96254,
+ "sha256": "4f0c73b08643e7001a521b15aff123c41c61e49c366e01d80634755912f674ad",
+ "screen_cells": {
+  "Published posts read": "7",
+  "Posts no other post links to": "4",
+  "Images with no alt attribute": "5 / 7",
+  "Internal links found": "8",
+  "Internal links per post (median)": "1.0",
+  "Posts with no internal link out": "2"
+ },
+ "logged_in_as": "admin",
+ "ts": "2026-10-03T22:42:09+0900"
+}

@@ -1,0 +1,255 @@
+{
+ "wp": "6.0.3",
+ "php": "7.4.32",
+ "plugin": "1.0.0",
+ "rounds": 1,
+ "passed": 24,
+ "total": 24,
+ "checks": [
+  {
+   "name": "V1 posts read",
+   "got": "7",
+   "want": "7",
+   "ok": true,
+   "why": "every published post is read, and nothing else is"
+  },
+  {
+   "name": "V2 orphan count",
+   "got": "4",
+   "want": "4",
+   "ok": true,
+   "why": "the headline number"
+  },
+  {
+   "name": "V3 orphan list",
+   "got": [
+    "Epsilon",
+    "Eta",
+    "Gamma",
+    "Zeta"
+   ],
+   "want": [
+    "Epsilon",
+    "Eta",
+    "Gamma",
+    "Zeta"
+   ],
+   "ok": true,
+   "why": "which posts, not just how many"
+  },
+  {
+   "name": "V4 images",
+   "got": "5 / 7",
+   "want": "5 / 7",
+   "ok": true,
+   "why": "images with no alt, out of all images"
+  },
+  {
+   "name": "V5 internal links total",
+   "got": "8",
+   "want": "8",
+   "ok": true,
+   "why": "tel:, mailto:, #anchor and outside links are not internal links"
+  },
+  {
+   "name": "V6 internal links median",
+   "got": "1.0",
+   "want": "1.0",
+   "ok": true,
+   "why": "the middle post, with an odd number of posts"
+  },
+  {
+   "name": "V7 posts with no link out",
+   "got": "2",
+   "want": "2",
+   "ok": true,
+   "why": "counted separately from orphans"
+  },
+  {
+   "name": "V8 the_content filters ran",
+   "got": false,
+   "want": false,
+   "ok": true,
+   "why": "Delta is linked to only from a shortcode, so it is an orphan unless filters run"
+  },
+  {
+   "name": "V9 HTML comments ignored",
+   "got": true,
+   "want": true,
+   "ok": true,
+   "why": "the only link to Eta is inside an HTML comment, which is not on the page"
+  },
+  {
+   "name": "V10 self link does not rescue",
+   "got": true,
+   "want": true,
+   "ok": true,
+   "why": "Gamma links to itself and nothing else links to it"
+  },
+  {
+   "name": "V11 empty alt is not missing",
+   "got": "5 / 7",
+   "want": "5 / 7",
+   "ok": true,
+   "why": "alt=\"\" is correct markup for a decorative image"
+  },
+  {
+   "name": "V12 per row figures",
+   "got": [
+    "1",
+    "1"
+   ],
+   "want": [
+    "1",
+    "1"
+   ],
+   "ok": true,
+   "why": "the orphan table shows that row's own link and alt counts"
+  },
+  {
+   "name": "V13 two links to one post",
+   "got": false,
+   "want": false,
+   "ok": true,
+   "why": "Alpha links to Beta twice; two links, one linking post"
+  },
+  {
+   "name": "V14 batching finished",
+   "got": true,
+   "want": true,
+   "ok": true,
+   "why": "the scan ran to the end over HTTP"
+  },
+  {
+   "name": "V15 nothing on the front end",
+   "got": true,
+   "want": true,
+   "ok": true,
+   "why": "the public home page carries no mark from the plugin"
+  },
+  {
+   "name": "V16 no request leaves the site",
+   "got": [],
+   "want": [],
+   "ok": true,
+   "why": "guideline 7: there is no way for it to track anyone, because it cannot talk out"
+  },
+  {
+   "name": "V17 no front end hook",
+   "got": [
+    "admin_menu"
+   ],
+   "want": [
+    "admin_menu"
+   ],
+   "ok": true,
+   "why": "guideline 10: the only hook is the one that adds the admin screen"
+  },
+  {
+   "name": "V18 no notice and no nag",
+   "got": false,
+   "want": false,
+   "ok": true,
+   "why": "guideline 11: nothing is pushed at the user outside this plugin's own screen"
+  },
+  {
+   "name": "V19 nothing is locked or for sale",
+   "got": [],
+   "want": [],
+   "ok": true,
+   "why": "guideline 5: no trial, no locked feature"
+  },
+  {
+   "name": "V20 editor is refused the screen",
+   "got": [
+    false,
+    false,
+    true
+   ],
+   "want": [
+    false,
+    false,
+    true
+   ],
+   "ok": true,
+   "why": "the report itself is not served to a editor, by GET or by POST, and they are told why"
+  },
+  {
+   "name": "V20 subscriber is refused the screen",
+   "got": [
+    false,
+    false,
+    true
+   ],
+   "want": [
+    false,
+    false,
+    true
+   ],
+   "ok": true,
+   "why": "the report itself is not served to a subscriber, by GET or by POST, and they are told why"
+  },
+  {
+   "name": "V22 an admin nonce does not run a scan",
+   "got": true,
+   "want": true,
+   "ok": true,
+   "why": "the only token on the form is the nonce, so capability has to be checked as well"
+  },
+  {
+   "name": "V23 the menu item is not shown to them",
+   "got": [],
+   "want": [],
+   "ok": true,
+   "why": "a link they cannot follow does not belong in their Tools menu"
+  },
+  {
+   "name": "V24 the plugin refuses on its own",
+   "got": [
+    true,
+    [
+     "plugin"
+    ]
+   ],
+   "want": [
+    true,
+    [
+     "plugin"
+    ]
+   ],
+   "ok": true,
+   "why": "WordPress blocks the page before our code runs, so the plugin's own current_user_can() is only proved by calling ilaudit_render() as an editor"
+  }
+ ],
+ "permission_gate": {
+  "roles": {
+   "editor": {
+    "get_status": 403,
+    "post_status": 403,
+    "get_showed_report": false,
+    "post_showed_report": false,
+    "menu_links_to_screen": false,
+    "refusal": [
+     "wordpress"
+    ]
+   },
+   "subscriber": {
+    "get_status": 403,
+    "post_status": 403,
+    "get_showed_report": false,
+    "post_showed_report": false,
+    "menu_links_to_screen": false,
+    "refusal": [
+     "wordpress"
+    ]
+   }
+  },
+  "state_unchanged": true,
+  "state_before": "{\"version\":\"1.0.0\",\"ids\":[5,6,7,8,9,10,11],\"done\":7,\"per\":{\"5\":{\"internal\":2,\"im",
+  "state_after": "{\"version\":\"1.0.0\",\"ids\":[5,6,7,8,9,10,11],\"done\":7,\"per\":{\"5\":{\"internal\":2,\"im",
+  "own_guard_rc": 1,
+  "own_guard_said": [
+   "plugin"
+  ]
+ }
+}
