@@ -3,7 +3,7 @@
  * Plugin Name:       Internal Link Audit
  * Plugin URI:        https://github.com/honokasoftware-ai/internal-link-audit
  * Description:       Read-only report of three things you cannot see one post at a time: published posts that no other post links to, images with no alt text, and how many internal links each post has. It never changes your content.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Honoka Software
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ILAUDIT_VERSION', '1.0.0' );
+define( 'ILAUDIT_VERSION', '1.0.1' );
 define( 'ILAUDIT_STATE', 'ilaudit_state' );   // scan in progress / finished state
 define( 'ILAUDIT_SLUG', 'internal-link-audit' );
 define( 'ILAUDIT_MAX_POSTS', 5000 );          // hard ceiling, see readme.txt FAQ
@@ -190,10 +190,21 @@ function ilaudit_resolve( $url ) {
 }
 
 /**
- * Measure one post exactly as a visitor sees it.
+ * Measure what one post itself puts on the page.
  *
- * the_content filters are applied so that shortcodes and blocks are expanded;
- * counting raw post_content would miss links and images that the theme builds.
+ * Blocks and shortcodes are expanded, because a link written inside a block or a
+ * shortcode is still a link the author put in that post; counting raw
+ * post_content would miss it.
+ *
+ * What is deliberately NOT run is the the_content filter chain. A plugin hooked
+ * there appends the same markup to every post on the site - related posts,
+ * share buttons, an advert - and that markup belongs to the site, not to the
+ * post. Measured on 2026-10-04 with a seven post fixture and one such plugin
+ * active: running the chain turned 8 internal links into 15, 7 images into 14,
+ * and made an orphaned post look as though something linked to it. The headline
+ * number of this plugin would have been wrong on any site with a related posts
+ * plugin installed. Checks V25 and V26 hold this shut.
+ *
  * HTML comments are dropped first: a commented-out draft is not on the page, so
  * reporting its images as "missing alt" would be false (measured on nendeb.com).
  *
@@ -201,7 +212,7 @@ function ilaudit_resolve( $url ) {
  * @return array
  */
 function ilaudit_measure_post( $post ) {
-	$html = (string) apply_filters( 'the_content', $post->post_content );
+	$html = do_shortcode( do_blocks( (string) $post->post_content ) );
 	$html = preg_replace( '/<!--.*?(?:-->|$)/s', '', $html );
 
 	$img      = ilaudit_images( $html );
@@ -275,7 +286,11 @@ function ilaudit_start() {
 			'fields'           => 'ids',
 			'orderby'          => 'ID',
 			'order'            => 'ASC',
-			'suppress_filters' => true,
+			// Left on so that a site which filters its own queries gets the posts
+			// it expects to see. Suppressing filters is prohibited by the review
+			// checklist, and it would also hide posts from the very report an
+			// administrator opened this screen to read.
+			'suppress_filters' => false,
 		)
 	);
 	$state = ilaudit_blank_state();

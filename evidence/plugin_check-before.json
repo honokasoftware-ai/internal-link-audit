@@ -1,0 +1,27 @@
+{
+ "note": "plugin-check run against version 1.0.0, before the fixes of 2026-10-04. Kept so the two findings cannot be quietly forgotten.",
+ "pcp_version": "2.1.0",
+ "wp_version": "7.1.2",
+ "php_version": "8.3.35",
+ "plugin_version": "1.0.0",
+ "command": "wp plugin check internal-link-audit --format=json --include-experimental --include-low-severity-errors --include-low-severity-warnings --slug=internal-link-audit",
+ "count": 2,
+ "findings": [
+  {
+   "line": 204,
+   "column": 37,
+   "type": "WARNING",
+   "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound",
+   "message": "Hook names invoked by a theme/plugin should start with the theme/plugin prefix. Found: &quot;the_content&quot;.",
+   "docs": ""
+  },
+  {
+   "line": 278,
+   "column": 13,
+   "type": "ERROR",
+   "code": "WordPressVIPMinimum.Performance.WPQueryParams.SuppressFilters_suppress_filters",
+   "message": "Setting `suppress_filters` to `true` is prohibited.",
+   "docs": ""
+  }
+ ]
+}

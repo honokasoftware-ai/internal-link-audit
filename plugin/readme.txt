@@ -4,7 +4,7 @@ Tags: internal links, orphaned posts, image alt, accessibility, audit
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,7 +29,7 @@ It does not write links for you, suggest keywords, promise a ranking, check link
 = How the numbers are counted =
 
 * Only published posts are read. Pages, drafts, attachments and other post types are left out.
-* Each post is measured after the content filters run, so shortcodes and blocks are counted the way a visitor sees them. Text inside HTML comments is not counted, because it is not on the page.
+* Blocks and shortcodes inside a post are expanded before it is measured, so a link written inside one still counts. Markup that another plugin appends to every post when it is displayed, such as a related posts box, share buttons or an advert, is not counted: it belongs to the site rather than to the post. Text inside HTML comments is not counted either, because it is not on the page.
 * An internal link is a link to this same site. Links starting with `tel:`, `mailto:` or `#` are not internal links. A link from a post to itself does not count as a link to it.
 * `alt=""` is not reported as missing. Only an `img` tag with no alt attribute at all is.
 * Link targets are resolved with WordPress' own `url_to_postid()`, so a link written before a slug or category change still counts for the post it now points to. An outside crawler comparing URL paths cannot do this.
@@ -70,13 +70,21 @@ Only users who can manage options, which normally means administrators. The scre
 
 = It says an image has no alt, but I set one =
 
-Check whether it is `alt=""`. That is correct markup for a decorative image and this plugin does not report it as missing. If the alt text is added by your theme or another plugin at display time, it is counted, because the measurement happens after the content filters run.
+Check whether it is `alt=""`. That is correct markup for a decorative image and this plugin does not report it as missing. Note that the measurement reads the post's own content with blocks and shortcodes expanded, so an alt attribute that your theme or another plugin adds at display time is not seen here.
+
+= I have a related posts plugin. Does its box count as internal links? =
+
+No. Markup that a plugin or a theme appends to every post when it is displayed is not part of that post and is not counted, in either direction. Without that rule a related posts box would add a link to every post on the site and no post would ever look orphaned again.
 
 == Screenshots ==
 
 1. Tools -> Internal Link Audit after a scan: the summary of six figures and the list of posts nothing links to.
 
 == Changelog ==
+
+= 1.0.1 =
+* Fixed: content that another plugin appends through the `the_content` filter, such as a related posts box, was counted as part of the post. On a site with such a plugin every figure was too high and an orphaned post could look as though something linked to it.
+* Changed: the query that lists published posts no longer suppresses query filters.
 
 = 1.0.0 =
 * First release.

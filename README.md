@@ -18,7 +18,7 @@ Admin screen: **Tools → Internal Link Audit**. Requires the `manage_options` c
 
 ## Install
 
-Download the zip from the [v1.0.0 release](https://github.com/honokasoftware-ai/internal-link-audit/releases/tag/v1.0.0)
+Download the zip from the [v1.0.1 release](https://github.com/honokasoftware-ai/internal-link-audit/releases/tag/v1.0.1)
 and upload it under *Plugins → Add New → Upload Plugin*, or copy `plugin/` into
 `wp-content/plugins/internal-link-audit/`.
 
@@ -40,11 +40,16 @@ real WordPress in Docker rather than against mocks.
 
 | | Result |
 |---|---|
-| Environments | WordPress **7.1.2** / PHP **8.3.35** and WordPress **6.0.3** / PHP **7.4.32** |
-| Behaviour | **24 / 24** in both (`tools/harness.py`) |
+| Environments | WordPress **7.1.2** / PHP **8.3.35**; WordPress **6.0.3** / PHP **7.4.32** on 1.0.0 |
+| Behaviour | **26 / 26** (`tools/harness.py`) |
+| The Plugin Review Team's own checker | **0 findings** (`tools/plugin_check.py`, plugin-check 2.1.0) |
 | The readme's own claims | **29 / 29** (`tools/readme_test.py`) |
-| Sabotage caught | **10 / 10** against the running plugin, **19 / 19** against the readme |
+| Sabotage caught | **12 / 12** against the running plugin, **19 / 19** against the readme, **2 / 2** against the checker |
 | Raw records | `evidence/` |
+
+The 6.0.3 figure in that first row is from version 1.0.0 and has not been taken again
+since; `evidence/verify-6.0.3.json` says which version produced it. 1.0.1 has only been
+run on 7.1.2.
 
 Two rules keep the checks honest:
 
@@ -65,7 +70,7 @@ somewhere else and on 2026-10-03 ours pointed at a repository that returned 404.
 
 `python3 tools/check_release_asset.py` is the same idea one step further out: it asks
 GitHub for the release anonymously, downloads the attached zip, and then fetches each of
-the four shipped files from the `v1.0.0` tag and hashes them against the zip. A release
+the four shipped files from the `v1.0.1` tag and hashes them against the zip. A release
 left as a draft, a zip rebuilt here after the upload, and a tag serving code the download
 does not contain are all invisible from inside the repository, and a stranger meets each
 of them as a broken promise on this page.
@@ -75,11 +80,28 @@ MySQL pair in Docker that is **not included here**. What is included is every re
 produced, in `evidence/verify-7.1.2.json` and `evidence/verify-6.0.3.json`, check by
 check with the expected and the observed value for each.
 
-`tools/teeth_test.py` then breaks the plugin on purpose, ten different ways, and
+`tools/teeth_test.py` then breaks the plugin on purpose, twelve different ways, and
 requires each break to be caught, including: a self link rescuing an orphan, counting
-inside HTML comments, reading stored content instead of rendered content, reporting
+inside HTML comments, reading stored content without expanding shortcodes, reporting
 `alt=""` as missing, counting `tel:` and `mailto:` as internal links, counting pages as
 posts, and returning a mean where a median was promised.
+
+`tools/plugin_check.py` runs the Plugin Review Team's own published checker
+(`plugin-check`) against the plugin in that same sandbox, which is a different
+measurement from reading their guidelines and grading ourselves. On 2026-10-04 it
+reported two things on version 1.0.0 (`evidence/plugin_check-before.json`), and one of
+them was not a style note:
+
+> A plugin should not invoke the core hook `the_content`.
+
+We were running the whole `the_content` filter chain to expand shortcodes, which means
+**any other plugin hooked there wrote part of our report**. With one related posts
+plugin active on the seven post fixture, 8 internal links became 15, 7 images became 14,
+and an orphaned post stopped looking orphaned, which is this plugin's headline number.
+1.0.1 expands blocks and shortcodes directly instead, and the fixture now ships with
+such a plugin permanently active so that every figure above is also a check that
+injected markup is ignored (V25 and V26). `tools/plugin_check.py --prove` puts both
+defects back and requires the checker to report them again.
 
 ### Who can open the report
 
@@ -110,6 +132,10 @@ Written after reading the Detailed Plugin Guidelines, and each point is asserted
   roles and multisite (where `manage_options` means something different) are untested.
 - It has not been run on a production site yet, and it is not on WordPress.org yet.
   The release here is the only way to install it today.
+- Content a theme or another plugin appends at display time is not counted. On a site
+  built with a page builder that stores its content outside `post_content` and renders
+  it through `the_content`, this plugin will therefore report few links or none. That is
+  not measured on such a site yet.
 
 ## Licence
 

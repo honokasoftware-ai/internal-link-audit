@@ -137,7 +137,8 @@ def seed():
         os.makedirs('/tmp/ilaudit-mu-backup', exist_ok=True)
         for f in keep:
             os.replace(os.path.join(mu, f), os.path.join('/tmp/ilaudit-mu-backup', f))
-    sh(['cp', os.path.join(HERE, 'fixture', '90-ilaudit-fixture-shortcode.php'), mu])
+    for f in ('90-ilaudit-fixture-shortcode.php', '92-ilaudit-fixture-injector.php'):
+        sh(['cp', os.path.join(HERE, 'fixture', f), mu])
 
     wpcli(['rewrite', 'structure', '/%postname%/', '--hard'])
     wpcli(['rewrite', 'flush', '--hard'])
@@ -389,8 +390,8 @@ def verify(html, rounds, gate=None):
        str(EXPECTED['zero_internal']), 'counted separately from orphans')
 
     # Each of these fails on its own if one specific rule is dropped.
-    ck('V8 the_content filters ran', 'Delta' in (orphan_titles(html) or []), False,
-       'Delta is linked to only from a shortcode, so it is an orphan unless filters run')
+    ck('V8 shortcodes are expanded', 'Delta' in (orphan_titles(html) or []), False,
+       'Delta is linked to only from a shortcode, so it is an orphan unless shortcodes are expanded')
     ck('V9 HTML comments ignored', 'Eta' in (orphan_titles(html) or []), True,
        'the only link to Eta is inside an HTML comment, which is not on the page')
     ck('V10 self link does not rescue', 'Gamma' in (orphan_titles(html) or []), True,
@@ -405,6 +406,19 @@ def verify(html, rounds, gate=None):
        'Alpha links to Beta twice; two links, one linking post')
     ck('V14 batching finished', rounds >= 1 and 'Scan in progress' not in html, True,
        'the scan ran to the end over HTTP')
+    ck('V25 a third party plugin really does inject into the page',
+       injected_marker_on_front_end(), True,
+       'the fixture plugin appends a related posts box to every post through the_content, '
+       'so V26 is measuring something that is actually there')
+    ck('V26 injected content is not counted as the post\'s own',
+       (cell(html, 'Internal links found'), cell(html, 'Images with no alt attribute'),
+        'Eta' in (orphan_titles(html) or [])),
+       (str(EXPECTED['internal_sum']),
+        '%d / %d' % (EXPECTED['images_no_alt'], EXPECTED['images']), True),
+       'with the injector active the figures and the orphan list are unchanged; running the '
+       'the_content chain instead gave 15 links, 12 / 14 images and rescued Eta (2026-10-04). '
+       'This is a composite of cells other checks also read, so it trips on any numeric '
+       'defect; its own job is to make the injector part of the fixture on purpose')
     ck('V15 nothing on the front end', front_end_clean(), True,
        'the public home page carries no mark from the plugin')
 
@@ -445,6 +459,20 @@ def verify(html, rounds, gate=None):
            'WordPress blocks the page before our code runs, so the plugin\'s own '
            'current_user_can() is only proved by calling ilaudit_render() as an editor')
     return checks
+
+
+def injected_marker_on_front_end():
+    """Is the fixture plugin's appended box actually on a public post page?
+
+    Without this, check V26 would pass for the wrong reason on any day the
+    fixture file failed to load: an injection that never happened is trivially
+    not counted.
+    """
+    with urllib.request.urlopen(BASE + '/alpha/', timeout=30) as r:
+        html = r.read().decode('utf-8', 'replace')
+    return ('You may also like' in html
+            and 'fixture-related-posts' in html
+            and 'related-thumb.png' in html)
 
 
 def front_end_clean():

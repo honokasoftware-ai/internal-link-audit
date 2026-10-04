@@ -1,7 +1,7 @@
 {
- "sabotages": 10,
- "caught": 10,
- "caught_exactly": 5,
+ "sabotages": 11,
+ "caught": 11,
+ "caught_exactly": 3,
  "results": [
   {
    "case": "S1 a self link rescues the post",
@@ -25,7 +25,8 @@
     "V2 orphan count",
     "V3 orphan list",
     "V5 internal links total",
-    "V9 HTML comments ignored"
+    "V9 HTML comments ignored",
+    "V26 injected content is not counted as the post's own"
    ],
    "expected_to_fail": [
     "V9 HTML comments ignored"
@@ -33,7 +34,7 @@
    "verdict": "CAUGHT, other checks too"
   },
   {
-   "case": "S3 read stored content, not the rendered page",
+   "case": "S3 read stored content without expanding shortcodes",
    "kind": "sabotage",
    "rounds": 1,
    "failed": [
@@ -42,12 +43,42 @@
     "V4 images",
     "V5 internal links total",
     "V7 posts with no link out",
-    "V8 the_content filters ran",
+    "V8 shortcodes are expanded",
     "V11 empty alt is not missing",
-    "V12 per row figures"
+    "V12 per row figures",
+    "V26 injected content is not counted as the post's own"
    ],
    "expected_to_fail": [
-    "V8 the_content filters ran"
+    "V8 shortcodes are expanded"
+   ],
+   "verdict": "CAUGHT, other checks too"
+  },
+  {
+   "case": "S13 run the whole the_content chain, so other plugins write the report",
+   "kind": "sabotage",
+   "rounds": 1,
+   "failed": [
+    "V2 orphan count",
+    "V3 orphan list",
+    "V4 images",
+    "V5 internal links total",
+    "V6 internal links median",
+    "V7 posts with no link out",
+    "V9 HTML comments ignored",
+    "V11 empty alt is not missing",
+    "V12 per row figures",
+    "V26 injected content is not counted as the post's own"
+   ],
+   "expected_to_fail": [
+    "V2 orphan count",
+    "V3 orphan list",
+    "V4 images",
+    "V5 internal links total",
+    "V6 internal links median",
+    "V7 posts with no link out",
+    "V11 empty alt is not missing",
+    "V12 per row figures",
+    "V26 injected content is not counted as the post's own"
    ],
    "verdict": "CAUGHT, other checks too"
   },
@@ -57,13 +88,14 @@
    "rounds": 1,
    "failed": [
     "V4 images",
-    "V11 empty alt is not missing"
+    "V11 empty alt is not missing",
+    "V26 injected content is not counted as the post's own"
    ],
    "expected_to_fail": [
     "V4 images",
     "V11 empty alt is not missing"
    ],
-   "verdict": "CAUGHT"
+   "verdict": "CAUGHT, other checks too"
   },
   {
    "case": "S5 tel: and mailto: count as internal links",
@@ -71,7 +103,8 @@
    "rounds": 1,
    "failed": [
     "V5 internal links total",
-    "V6 internal links median"
+    "V6 internal links median",
+    "V26 injected content is not counted as the post's own"
    ],
    "expected_to_fail": [
     "V5 internal links total"
@@ -83,12 +116,13 @@
    "kind": "sabotage",
    "rounds": 1,
    "failed": [
-    "V5 internal links total"
+    "V5 internal links total",
+    "V26 injected content is not counted as the post's own"
    ],
    "expected_to_fail": [
     "V5 internal links total"
    ],
-   "verdict": "CAUGHT"
+   "verdict": "CAUGHT, other checks too"
   },
   {
    "case": "S7 pages are scanned as well as posts",
@@ -99,7 +133,8 @@
     "V2 orphan count",
     "V3 orphan list",
     "V5 internal links total",
-    "V7 posts with no link out"
+    "V7 posts with no link out",
+    "V26 injected content is not counted as the post's own"
    ],
    "expected_to_fail": [
     "V1 posts read"

@@ -1,18 +1,18 @@
 {
- "file": "dist/internal-link-audit-1.0.0.zip",
- "version": "1.0.0",
- "bytes": 10593,
- "sha256": "42c655f52ef4234b276ce321243a223d21e03fae9ebe0fa6aeab81520ac8c8b1",
+ "file": "dist/internal-link-audit-1.0.1.zip",
+ "version": "1.0.1",
+ "bytes": 11296,
+ "sha256": "919fc533e76ac036c73c5c4336d2116f2cf2d928cf074c8e927652b459f3c779",
  "entries": [
   {
    "name": "internal-link-audit/internal-link-audit.php",
-   "bytes": 18367,
-   "sha256": "a0d16f27ba4d8d64bfb672d074fad59384e08c2c144b5281d07c26e13416d0d4"
+   "bytes": 19271,
+   "sha256": "0e584733e9eebe2ce36c8b837020b77de9388a5786c3baf48ebf0c0bff3db74b"
   },
   {
    "name": "internal-link-audit/readme.txt",
-   "bytes": 4329,
-   "sha256": "d9016b762db33f9c55d2a00f00d12877f534d208b88410588e00d21e2a349e00"
+   "bytes": 5259,
+   "sha256": "28c156f8648e9a80e35e0eb8ee7d73c263294a35c1351237497585893b785cbf"
   },
   {
    "name": "internal-link-audit/uninstall.php",
