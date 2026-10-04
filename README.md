@@ -23,7 +23,7 @@ and upload it under *Plugins → Add New → Upload Plugin*, or copy `plugin/` i
 `wp-content/plugins/internal-link-audit/`.
 
 ```
-sha256  42c655f52ef4234b276ce321243a223d21e03fae9ebe0fa6aeab81520ac8c8b1
+sha256  919fc533e76ac036c73c5c4336d2116f2cf2d928cf074c8e927652b459f3c779
 ```
 
 The same file is in `dist/` here. `tools/check_release_asset.py` downloads the published

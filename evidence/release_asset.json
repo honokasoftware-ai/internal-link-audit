@@ -1,36 +1,36 @@
 {
  "repo": "honokasoftware-ai/internal-link-audit",
- "tag": "v1.0.0",
- "version": "1.0.0",
+ "tag": "v1.0.1",
+ "version": "1.0.1",
  "api_status": 200,
  "anonymous": true,
- "ts": "2026-10-04T02:23:52+09:00",
+ "ts": "2026-10-04T17:58:17+09:00",
  "draft": false,
  "prerelease": false,
- "html_url": "https://github.com/honokasoftware-ai/internal-link-audit/releases/tag/v1.0.0",
- "target_sha": "2186b01d3576a876560945c6fc557e928c34ef12",
+ "html_url": "https://github.com/honokasoftware-ai/internal-link-audit/releases/tag/v1.0.1",
+ "target_sha": "6e80639b994f9028c714b421b4408e1aeac71e73",
  "asset_names": [
-  "internal-link-audit-1.0.0.zip"
+  "internal-link-audit-1.0.1.zip"
  ],
- "asset": "internal-link-audit-1.0.0.zip",
+ "asset": "internal-link-audit-1.0.1.zip",
  "download_status": 200,
- "download_url": "https://github.com/honokasoftware-ai/internal-link-audit/releases/download/v1.0.0/internal-link-audit-1.0.0.zip",
- "final_host_path": "release-assets.githubusercontent.com/github-production-release-asset/1403388355/a83287fc-91d8-486e-8b67-0bcd88c5f037",
- "downloaded_bytes": 10593,
- "downloaded_sha256": "42c655f52ef4234b276ce321243a223d21e03fae9ebe0fa6aeab81520ac8c8b1",
+ "download_url": "https://github.com/honokasoftware-ai/internal-link-audit/releases/download/v1.0.1/internal-link-audit-1.0.1.zip",
+ "final_host_path": "release-assets.githubusercontent.com/github-production-release-asset/1403388355/95f00f2a-a3dd-465f-8f67-1100643e7fbb",
+ "downloaded_bytes": 11296,
+ "downloaded_sha256": "919fc533e76ac036c73c5c4336d2116f2cf2d928cf074c8e927652b459f3c779",
  "asset_state": "uploaded",
  "tag_commit_status": 200,
  "tag_files": [
   {
    "name": "internal-link-audit.php",
    "status": 200,
-   "sha256": "a0d16f27ba4d8d64bfb672d074fad59384e08c2c144b5281d07c26e13416d0d4",
+   "sha256": "0e584733e9eebe2ce36c8b837020b77de9388a5786c3baf48ebf0c0bff3db74b",
    "same_as_zip": true
   },
   {
    "name": "readme.txt",
    "status": 200,
-   "sha256": "d9016b762db33f9c55d2a00f00d12877f534d208b88410588e00d21e2a349e00",
+   "sha256": "28c156f8648e9a80e35e0eb8ee7d73c263294a35c1351237497585893b785cbf",
    "same_as_zip": true
   },
   {

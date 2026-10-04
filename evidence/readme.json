@@ -29,8 +29,8 @@
   },
   {
    "name": "R2 stable tag is the shipped version",
-   "got": "1.0.0",
-   "want": "1.0.0",
+   "got": "1.0.1",
+   "want": "1.0.1",
    "ok": true,
    "why": "a stable tag that is not the version in the file ships the wrong code"
   },
@@ -270,8 +270,8 @@
     false,
     false,
     200,
-    "42c655f52ef4234b276ce321243a223d21e03fae9ebe0fa6aeab81520ac8c8b1",
-    "v1.0.0",
+    "919fc533e76ac036c73c5c4336d2116f2cf2d928cf074c8e927652b459f3c779",
+    "v1.0.1",
     200,
     true
    ],
@@ -280,8 +280,8 @@
     false,
     false,
     200,
-    "42c655f52ef4234b276ce321243a223d21e03fae9ebe0fa6aeab81520ac8c8b1",
-    "v1.0.0",
+    "919fc533e76ac036c73c5c4336d2116f2cf2d928cf074c8e927652b459f3c779",
+    "v1.0.1",
     200,
     true
    ],
