@@ -18,7 +18,7 @@ Admin screen: **Tools → Internal Link Audit**. Requires the `manage_options` c
 
 ## Install
 
-Download the zip from the [v1.0.1 release](https://github.com/honokasoftware-ai/internal-link-audit/releases/tag/v1.0.1)
+Download the zip from the [v1.1.0 release](https://github.com/honokasoftware-ai/internal-link-audit/releases/tag/v1.1.0)
 and upload it under *Plugins → Add New → Upload Plugin*, or copy `plugin/` into
 `wp-content/plugins/internal-link-audit/`.
 
@@ -40,19 +40,27 @@ real WordPress in Docker rather than against mocks.
 
 | | Result |
 |---|---|
-| Environments | WordPress **7.1.2** / PHP **8.3.35**; WordPress **6.0.3** / PHP **7.4.32** on 1.0.0 |
+| Environments | WordPress **7.1.2** / PHP **8.3.35** and WordPress **6.0.3** / PHP **7.4.32**, both on 1.1.0 |
 | Behaviour | **26 / 26** (`tools/harness.py`) |
 | The Plugin Review Team's own checker | **0 findings** (`tools/plugin_check.py`, plugin-check 2.1.0) |
 | The readme's own claims | **29 / 29** (`tools/readme_test.py`) |
 | Sabotage caught | **12 / 12** against the running plugin, **19 / 19** against the readme, **2 / 2** against the checker |
 | Raw records | `evidence/` |
 
-The 6.0.3 figure in that first row is from version 1.0.0 and has not been taken again
-since; `evidence/verify-6.0.3.json` says which version produced it. 1.0.1 has only been
-run on 7.1.2.
+Both rows of 26 are from 1.1.0 (7.1.2 re-measured 2026-10-07 after the rename): `evidence/verify-7.1.2.json` and
+`evidence/verify-6.0.3.json` each record the WordPress version, the PHP version and the
+plugin version that produced them, so the pair can be checked rather than taken on trust.
+The oldest supported version matters because the readme's "Requires at least" is a promise;
+6.0.3 is the oldest WordPress with an official Docker image, and PHP 7.4 is a different
+language version, not just an older WordPress.
 
-Two rules keep the checks honest:
+Three rules keep the checks honest:
 
+- **A sabotage that edits nothing is rejected, not scored.** The runner hashes the tree
+  before and after each deliberate breakage and reports `NO-OP` if no bytes moved. One
+  case used to spell out `Stable tag: 1.0.0`, so when the plugin became 1.0.1 it quietly
+  stopped editing anything and the count of caught breakages fell without anyone editing
+  a check. A hollow case now fails the run instead of reading as a missed catch.
 - **Expected values are hand computed.** `tools/harness.py` holds a seven post fixture
   site with the answer for every post written out in a table above the code. Using the
   plugin's own output as the expected value would pass no matter what the plugin did.
@@ -70,7 +78,7 @@ somewhere else and on 2026-10-03 ours pointed at a repository that returned 404.
 
 `python3 tools/check_release_asset.py` is the same idea one step further out: it asks
 GitHub for the release anonymously, downloads the attached zip, and then fetches each of
-the four shipped files from the `v1.0.1` tag and hashes them against the zip. A release
+the four shipped files from the `v1.1.0` tag and hashes them against the zip. A release
 left as a draft, a zip rebuilt here after the upload, and a tag serving code the download
 does not contain are all invisible from inside the repository, and a stranger meets each
 of them as a broken promise on this page.

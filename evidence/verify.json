@@ -1,7 +1,7 @@
 {
  "wp": "7.1.2",
  "php": "8.3.35",
- "plugin": "1.0.1",
+ "plugin": "1.1.0",
  "rounds": 1,
  "passed": 26,
  "total": 26,
@@ -70,7 +70,7 @@
    "got": false,
    "want": false,
    "ok": true,
-   "why": "Delta is linked to only from a shortcode, so it is an orphan unless filters run"
+   "why": "Delta is linked to only from a shortcode, so it is an orphan unless shortcodes are expanded"
   },
   {
    "name": "V9 HTML comments ignored",
@@ -140,7 +140,7 @@
     true
    ],
    "ok": true,
-   "why": "with the injector active the figures and the orphan list are unchanged; running the the_content chain instead gave 15 links, 12 / 14 images and rescued Eta (2026-10-04)"
+   "why": "with the injector active the figures and the orphan list are unchanged; running the the_content chain instead gave 15 links, 12 / 14 images and rescued Eta (2026-10-04). This is a composite of cells other checks also read, so it trips on any numeric defect; its own job is to make the injector part of the fixture on purpose"
   },
   {
    "name": "V15 nothing on the front end",
@@ -267,8 +267,8 @@
    }
   },
   "state_unchanged": true,
-  "state_before": "{\"version\":\"1.0.1\",\"ids\":[15,16,17,18,19,20,21],\"done\":7,\"per\":{\"15\":{\"internal\"",
-  "state_after": "{\"version\":\"1.0.1\",\"ids\":[15,16,17,18,19,20,21],\"done\":7,\"per\":{\"15\":{\"internal\"",
+  "state_before": "{\"version\":\"1.0.1\",\"ids\":[29,30,31,32,33,34,35],\"done\":7,\"per\":{\"29\":{\"internal\"",
+  "state_after": "{\"version\":\"1.0.1\",\"ids\":[29,30,31,32,33,34,35],\"done\":7,\"per\":{\"29\":{\"internal\"",
   "own_guard_rc": 1,
   "own_guard_said": [
    "plugin"

@@ -156,12 +156,12 @@ def seed():
 
 
 def install_plugin():
-    dest = '%s:/var/www/html/wp-content/plugins/internal-link-audit' % WP
-    sh(['docker', 'exec', WP, 'rm', '-rf', '/var/www/html/wp-content/plugins/internal-link-audit'])
+    dest = '%s:/var/www/html/wp-content/plugins/honoka-internal-link-audit' % WP
+    sh(['docker', 'exec', WP, 'rm', '-rf', '/var/www/html/wp-content/plugins/honoka-internal-link-audit'])
     sh(['docker', 'cp', os.path.join(HERE, 'plugin'), dest])
-    sh(['docker', 'exec', WP, 'chown', '-R', '33:33', '/var/www/html/wp-content/plugins/internal-link-audit'])
-    wpcli(['plugin', 'activate', 'internal-link-audit'])
-    return wpcli(['plugin', 'get', 'internal-link-audit', '--field=version'])
+    sh(['docker', 'exec', WP, 'chown', '-R', '33:33', '/var/www/html/wp-content/plugins/honoka-internal-link-audit'])
+    wpcli(['plugin', 'activate', 'honoka-internal-link-audit'])
+    return wpcli(['plugin', 'get', 'honoka-internal-link-audit', '--field=version'])
 
 
 # ---------------------------------------------------------------- the real screen
@@ -205,13 +205,13 @@ class Admin:
         return self
 
     def screen(self):
-        return self.open(BASE + '/wp-admin/tools.php?page=internal-link-audit')
+        return self.open(BASE + '/wp-admin/tools.php?page=honoka-internal-link-audit')
 
     def press(self, html, action):
         nonce = re.search(r'name="_wpnonce" value="([^"]+)"', html)
         if not nonce:
             raise SystemExit('no nonce on the plugin screen (not logged in?)')
-        return self.open(BASE + '/wp-admin/tools.php?page=internal-link-audit',
+        return self.open(BASE + '/wp-admin/tools.php?page=honoka-internal-link-audit',
                          {'ilaudit_action': action, '_wpnonce': nonce.group(1),
                           'ilaudit_go': 'go'})
 
@@ -220,7 +220,7 @@ def run_scan():
     a = Admin()
     a.login()
     html = a.screen()
-    if 'Internal Link Audit' not in html:
+    if 'Honoka Internal Link Audit' not in html:
         raise SystemExit('the plugin screen did not render')
     html = a.press(html, 'start')
     rounds = 1
@@ -309,7 +309,7 @@ def state_option():
 
 
 ILAUDIT_STATE_OPTION = 'ilaudit_state'
-SCREEN = '/wp-admin/tools.php?page=internal-link-audit'
+SCREEN = '/wp-admin/tools.php?page=honoka-internal-link-audit'
 
 
 def permission_gate(admin_html):
@@ -346,7 +346,7 @@ def permission_gate(admin_html):
             # the report's own headline row: if this is on the page they were served the report
             'get_showed_report': 'Published posts read' in get_html,
             'post_showed_report': 'Published posts read' in post_html,
-            'menu_links_to_screen': 'page=internal-link-audit' in menu_html,
+            'menu_links_to_screen': 'page=honoka-internal-link-audit' in menu_html,
             'refusal': refusal_words(get_html),
         }
     # Did any of that move the option a scan writes?
@@ -422,7 +422,7 @@ def verify(html, rounds, gate=None):
     ck('V15 nothing on the front end', front_end_clean(), True,
        'the public home page carries no mark from the plugin')
 
-    src = php_code(open(os.path.join(HERE, 'plugin', 'internal-link-audit.php'),
+    src = php_code(open(os.path.join(HERE, 'plugin', 'honoka-internal-link-audit.php'),
                         encoding='utf-8').read())
     ck('V16 no request leaves the site',
        sorted(set(re.findall(r'wp_remote_\w+|curl_init|fsockopen|stream_socket_client', src))), [],

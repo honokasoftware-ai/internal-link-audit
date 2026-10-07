@@ -15,8 +15,8 @@ Two entries are not sabotage:
 
     python3 tools/teeth_test.py           # needs the sandbox up and harness.py all run once
 
-Note that this rewrites plugin/internal-link-audit.php and puts it back. The
-original is kept in plugin/.internal-link-audit.php.orig until the run ends.
+Note that this rewrites plugin/honoka-internal-link-audit.php and puts it back. The
+original is kept in plugin/.honoka-internal-link-audit.php.orig until the run ends.
 """
 import json
 import os
@@ -27,8 +27,8 @@ HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(HERE, 'tools'))
 import harness                                              # noqa: E402
 
-MAIN = os.path.join(HERE, 'plugin', 'internal-link-audit.php')
-BACKUP = os.path.join(HERE, 'plugin', '.internal-link-audit.php.orig')
+MAIN = os.path.join(HERE, 'plugin', 'honoka-internal-link-audit.php')
+BACKUP = os.path.join(HERE, 'plugin', '.honoka-internal-link-audit.php.orig')
 
 # name, old, new, which checks should fail, kind
 CASES = [
@@ -74,7 +74,7 @@ CASES = [
     ('S11 the plugin trusts WordPress to have checked the capability',
      "\tif ( ! current_user_can( 'manage_options' ) ) {\n"
      "\t\twp_die( esc_html__( 'You do not have permission to view this report.',"
-     " 'internal-link-audit' ) );\n\t}\n",
+     " 'honoka-internal-link-audit' ) );\n\t}\n",
      '',
      ['V24 the plugin refuses on its own'], 'sabotage'),
     ('S12 the screen is registered at a capability a reader has',

@@ -12,7 +12,7 @@ import sys
 import zipfile
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SLUG = 'internal-link-audit'
+SLUG = 'honoka-internal-link-audit'
 SRC = os.path.join(HERE, 'plugin')
 # Screenshots live in SVN /assets, not in the plugin zip: shipping them would put
 # 100 KB of pictures into every install for no reason.

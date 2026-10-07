@@ -39,8 +39,8 @@ import sys
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORK = os.path.join(os.environ.get('TMPDIR', '/tmp'), 'honoka-wp-sandbox')
 NET, WP, DB = 'honoka-wp-net', 'honoka-wp', 'honoka-wp-db'
-SLUG = 'internal-link-audit'
-MAIN = os.path.join(HERE, 'plugin', 'internal-link-audit.php')
+SLUG = 'honoka-internal-link-audit'
+MAIN = os.path.join(HERE, 'plugin', 'honoka-internal-link-audit.php')
 
 # The two findings of 2026-10-04, as the edits that bring them back.
 DEFECTS = [

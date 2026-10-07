@@ -1,0 +1,17 @@
+{
+ "measured_at": "2026-10-07T14:55:32+09:00",
+ "candidate_name": "Honoka Internal Link Audit",
+ "candidate_slug": "honoka-internal-link-audit",
+ "slug_lookup": {
+  "http": 404,
+  "body": "{\"error\":\"Plugin not found.\"}"
+ },
+ "slug_free": true,
+ "searches": {
+  "Honoka Internal Link Audit": [],
+  "Honoka": [],
+  "honoka software": []
+ },
+ "names_containing_honoka": [],
+ "why": "the name 'Internal Link Audit' appears verbatim inside 'OrphanPages - Internal Link Audit, Orphaned Pages, Broken Links & SEO Content Structure Analyzer' (slug orphanpages, 2025-12-11, 70 installs), so requirements[naming] on the submission form could not be ticked truthfully"
+}

@@ -1,10 +1,10 @@
 {
  "wp": "6.0.3",
  "php": "7.4.32",
- "plugin": "1.0.0",
+ "plugin": "1.0.1",
  "rounds": 1,
- "passed": 24,
- "total": 24,
+ "passed": 26,
+ "total": 26,
  "checks": [
   {
    "name": "V1 posts read",
@@ -66,11 +66,11 @@
    "why": "counted separately from orphans"
   },
   {
-   "name": "V8 the_content filters ran",
+   "name": "V8 shortcodes are expanded",
    "got": false,
    "want": false,
    "ok": true,
-   "why": "Delta is linked to only from a shortcode, so it is an orphan unless filters run"
+   "why": "Delta is linked to only from a shortcode, so it is an orphan unless shortcodes are expanded"
   },
   {
    "name": "V9 HTML comments ignored",
@@ -119,6 +119,28 @@
    "want": true,
    "ok": true,
    "why": "the scan ran to the end over HTTP"
+  },
+  {
+   "name": "V25 a third party plugin really does inject into the page",
+   "got": true,
+   "want": true,
+   "ok": true,
+   "why": "the fixture plugin appends a related posts box to every post through the_content, so V26 is measuring something that is actually there"
+  },
+  {
+   "name": "V26 injected content is not counted as the post's own",
+   "got": [
+    "8",
+    "5 / 7",
+    true
+   ],
+   "want": [
+    "8",
+    "5 / 7",
+    true
+   ],
+   "ok": true,
+   "why": "with the injector active the figures and the orphan list are unchanged; running the the_content chain instead gave 15 links, 12 / 14 images and rescued Eta (2026-10-04). This is a composite of cells other checks also read, so it trips on any numeric defect; its own job is to make the injector part of the fixture on purpose"
   },
   {
    "name": "V15 nothing on the front end",
@@ -245,8 +267,8 @@
    }
   },
   "state_unchanged": true,
-  "state_before": "{\"version\":\"1.0.0\",\"ids\":[5,6,7,8,9,10,11],\"done\":7,\"per\":{\"5\":{\"internal\":2,\"im",
-  "state_after": "{\"version\":\"1.0.0\",\"ids\":[5,6,7,8,9,10,11],\"done\":7,\"per\":{\"5\":{\"internal\":2,\"im",
+  "state_before": "{\"version\":\"1.0.1\",\"ids\":[5,6,7,8,9,10,11],\"done\":7,\"per\":{\"5\":{\"internal\":2,\"im",
+  "state_after": "{\"version\":\"1.0.1\",\"ids\":[5,6,7,8,9,10,11],\"done\":7,\"per\":{\"5\":{\"internal\":2,\"im",
   "own_guard_rc": 1,
   "own_guard_said": [
    "plugin"

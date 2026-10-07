@@ -1,19 +1,16 @@
 {
  "sabotages": 19,
- "caught": 19,
+ "caught": 18,
+ "no_op": 1,
  "results": [
   {
    "case": "S1 stable tag drifts from the version",
-   "failed": [
-    "R2 stable tag is the shipped version",
-    "R9 changelog covers the stable tag",
-    "R25 the zip holds the files as they are now"
-   ],
+   "failed": [],
    "expected": [
     "R2 stable tag is the shipped version",
     "R9 changelog covers the stable tag"
    ],
-   "verdict": "CAUGHT, other checks too"
+   "verdict": "NO-OP: the sabotage changed no bytes"
   },
   {
    "case": "S2 tested up to a version never run",

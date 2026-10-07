@@ -19,7 +19,7 @@ import urllib.error
 import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PHP = os.path.join(ROOT, 'plugin', 'internal-link-audit.php')
+PHP = os.path.join(ROOT, 'plugin', 'honoka-internal-link-audit.php')
 OUT = os.path.join(ROOT, 'evidence', 'plugin_uri.json')
 
 
@@ -49,6 +49,8 @@ def main():
         # so "200" here means "a logged out stranger can open it", which is the only
         # thing the header promises.
         'anonymous': True,
+        # the repository name, not the plugin slug: the plugin was renamed to
+        # honoka-internal-link-audit on 2026-10-07 but the repository was not
         'title_seen': bool(re.search(r'internal-link-audit', body, re.I)),
         'ts': datetime.datetime.now().astimezone().isoformat(timespec='seconds'),
     }

@@ -1,28 +1,28 @@
 {
- "file": "dist/internal-link-audit-1.0.1.zip",
- "version": "1.0.1",
- "bytes": 11296,
- "sha256": "919fc533e76ac036c73c5c4336d2116f2cf2d928cf074c8e927652b459f3c779",
+ "file": "dist/honoka-internal-link-audit-1.1.0.zip",
+ "version": "1.1.0",
+ "bytes": 11556,
+ "sha256": "12b50bb909bfd76ba7fd69439490875f727491f836d94fec4004778fc3428b8b",
  "entries": [
   {
-   "name": "internal-link-audit/internal-link-audit.php",
-   "bytes": 19271,
-   "sha256": "0e584733e9eebe2ce36c8b837020b77de9388a5786c3baf48ebf0c0bff3db74b"
+   "name": "honoka-internal-link-audit/honoka-internal-link-audit.php",
+   "bytes": 19551,
+   "sha256": "b7b69bc29cbfe269a54561a78957aaf7013ce32a4fb7175f17dd48321d6de0bc"
   },
   {
-   "name": "internal-link-audit/readme.txt",
-   "bytes": 5259,
-   "sha256": "28c156f8648e9a80e35e0eb8ee7d73c263294a35c1351237497585893b785cbf"
+   "name": "honoka-internal-link-audit/readme.txt",
+   "bytes": 5680,
+   "sha256": "58e96c1f496818f32eab888cd490d43fa1dabb96617d5ac5eebe9092e5a5252a"
   },
   {
-   "name": "internal-link-audit/uninstall.php",
-   "bytes": 213,
-   "sha256": "e72b68b5b7066df575605ec27a90f0de30cdd879bbd65deaa886aa47f17e83ce"
+   "name": "honoka-internal-link-audit/uninstall.php",
+   "bytes": 220,
+   "sha256": "2d06da6e8fd2444d580649e90cd120b6670e537689d8c5e8a93df0fb9e95a98b"
   },
   {
-   "name": "internal-link-audit/languages/internal-link-audit.pot",
-   "bytes": 4372,
-   "sha256": "a9be459418155f676b04e0a4b7a359ca216d57b3809af10bf658ca12da8bd5a5"
+   "name": "honoka-internal-link-audit/languages/honoka-internal-link-audit.pot",
+   "bytes": 4652,
+   "sha256": "31e70c2653af0e2d8c486b56862f491477411bf37f76cceda01189b1a6362328"
   }
  ]
 }

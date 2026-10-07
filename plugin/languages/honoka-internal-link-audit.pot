@@ -2,154 +2,154 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Internal Link Audit 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/internal-link-audit\n"
+"Project-Id-Version: Honoka Internal Link Audit 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/honoka-internal-link-audit\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-03T13:41:21+00:00\n"
+"POT-Creation-Date: 2026-10-07T05:59:21+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
-"X-Domain: internal-link-audit\n"
+"X-Domain: honoka-internal-link-audit\n"
 
 #. Plugin Name of the plugin
-#: internal-link-audit.php
-#: internal-link-audit.php:44
-#: internal-link-audit.php:45
-#: internal-link-audit.php:406
-msgid "Internal Link Audit"
+#: honoka-internal-link-audit.php
+#: honoka-internal-link-audit.php:44
+#: honoka-internal-link-audit.php:45
+#: honoka-internal-link-audit.php:421
+msgid "Honoka Internal Link Audit"
 msgstr ""
 
 #. Plugin URI of the plugin
-#: internal-link-audit.php
+#: honoka-internal-link-audit.php
 msgid "https://github.com/honokasoftware-ai/internal-link-audit"
 msgstr ""
 
 #. Description of the plugin
-#: internal-link-audit.php
+#: honoka-internal-link-audit.php
 msgid "Read-only report of three things you cannot see one post at a time: published posts that no other post links to, images with no alt text, and how many internal links each post has. It never changes your content."
 msgstr ""
 
 #. Author of the plugin
-#: internal-link-audit.php
+#: honoka-internal-link-audit.php
 msgid "Honoka Software"
 msgstr ""
 
-#: internal-link-audit.php:386
+#: honoka-internal-link-audit.php:401
 msgid "You do not have permission to view this report."
 msgstr ""
 
-#: internal-link-audit.php:407
+#: honoka-internal-link-audit.php:422
 msgid "This report only reads your posts. It never edits, inserts or deletes anything, and it sends nothing anywhere."
 msgstr ""
 
 #. translators: 1: posts measured, 2: posts found
-#: internal-link-audit.php:417
+#: honoka-internal-link-audit.php:432
 #, php-format
 msgid "Scan in progress: %1$d of %2$d posts measured."
 msgstr ""
 
-#: internal-link-audit.php:423
+#: honoka-internal-link-audit.php:438
 msgid "Measure the next batch"
 msgstr ""
 
-#: internal-link-audit.php:427
+#: honoka-internal-link-audit.php:442
 msgid "Run the scan"
 msgstr ""
 
-#: internal-link-audit.php:427
+#: honoka-internal-link-audit.php:442
 msgid "Run the scan again"
 msgstr ""
 
-#: internal-link-audit.php:437
+#: honoka-internal-link-audit.php:452
 msgid "No scan has been run yet."
 msgstr ""
 
 #. translators: 1: ceiling on the number of posts, 2: the same ceiling
-#: internal-link-audit.php:445
+#: honoka-internal-link-audit.php:460
 #, php-format
 msgid "This site has more than %1$d published posts. Only the oldest %2$d were read, so the orphan list is incomplete."
 msgstr ""
 
-#: internal-link-audit.php:452
+#: honoka-internal-link-audit.php:467
 msgid "Summary"
 msgstr ""
 
-#: internal-link-audit.php:454
+#: honoka-internal-link-audit.php:469
 msgid "Published posts read"
 msgstr ""
 
-#: internal-link-audit.php:456
-#: internal-link-audit.php:472
+#: honoka-internal-link-audit.php:471
+#: honoka-internal-link-audit.php:487
 msgid "Posts no other post links to"
 msgstr ""
 
-#: internal-link-audit.php:459
+#: honoka-internal-link-audit.php:474
 msgid "available when the scan finishes"
 msgstr ""
 
-#: internal-link-audit.php:461
+#: honoka-internal-link-audit.php:476
 msgid "Images with no alt attribute"
 msgstr ""
 
-#: internal-link-audit.php:462
+#: honoka-internal-link-audit.php:477
 msgid "Internal links found"
 msgstr ""
 
-#: internal-link-audit.php:463
+#: honoka-internal-link-audit.php:478
 msgid "Internal links per post (median)"
 msgstr ""
 
-#: internal-link-audit.php:464
+#: honoka-internal-link-audit.php:479
 msgid "Posts with no internal link out"
 msgstr ""
 
-#: internal-link-audit.php:474
+#: honoka-internal-link-audit.php:489
 msgid "Every post is linked to from at least one other post."
 msgstr ""
 
-#: internal-link-audit.php:477
+#: honoka-internal-link-audit.php:492
 msgid "Post"
 msgstr ""
 
-#: internal-link-audit.php:478
+#: honoka-internal-link-audit.php:493
 msgid "Published"
 msgstr ""
 
-#: internal-link-audit.php:479
+#: honoka-internal-link-audit.php:494
 msgid "Internal links out"
 msgstr ""
 
-#: internal-link-audit.php:480
+#: honoka-internal-link-audit.php:495
 msgid "Images with no alt"
 msgstr ""
 
-#: internal-link-audit.php:497
+#: honoka-internal-link-audit.php:512
 msgid "How these numbers are counted"
 msgstr ""
 
-#: internal-link-audit.php:499
+#: honoka-internal-link-audit.php:514
 msgid "Only published posts are read. Pages, drafts, attachments and other post types are left out."
 msgstr ""
 
-#: internal-link-audit.php:500
+#: honoka-internal-link-audit.php:515
 msgid "Each post is measured after the content filters run, so shortcodes and blocks are counted the way a visitor sees them. Text inside HTML comments is not counted, because it is not on the page."
 msgstr ""
 
-#: internal-link-audit.php:501
+#: honoka-internal-link-audit.php:516
 msgid "An internal link is a link to this same site. Links starting with tel:, mailto: or # are not internal links. A link from a post to itself does not count as a link to it."
 msgstr ""
 
-#: internal-link-audit.php:502
+#: honoka-internal-link-audit.php:517
 msgid "alt=\"\" is correct markup for a decorative image and is not reported as missing. Only an img tag with no alt attribute at all is."
 msgstr ""
 
-#: internal-link-audit.php:503
+#: honoka-internal-link-audit.php:518
 msgid "Link targets are resolved with WordPress' own url_to_postid(), so a link written before a slug or category change still counts for the post it now points to."
 msgstr ""
 
-#: internal-link-audit.php:513
+#: honoka-internal-link-audit.php:528
 msgid "Delete the stored report"
 msgstr ""

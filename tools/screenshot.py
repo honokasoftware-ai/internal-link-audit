@@ -20,7 +20,7 @@ HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORK = os.path.join(os.environ.get('TMPDIR', '/tmp'), 'honoka-wp-sandbox')
 PORT = os.environ.get('PORT', '8901')
 BASE = 'http://127.0.0.1:%s' % PORT
-SCREEN = '/wp-admin/tools.php?page=internal-link-audit'
+SCREEN = '/wp-admin/tools.php?page=honoka-internal-link-audit'
 OUT = os.path.join(HERE, 'assets', 'screenshot-1.png')
 
 

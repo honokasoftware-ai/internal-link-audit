@@ -28,7 +28,7 @@ import urllib.error
 import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PHP = os.path.join(ROOT, 'plugin', 'internal-link-audit.php')
+PHP = os.path.join(ROOT, 'plugin', 'honoka-internal-link-audit.php')
 DIST = os.path.join(ROOT, 'evidence', 'dist.json')
 OUT = os.path.join(ROOT, 'evidence', 'release_asset.json')
 UA = {'User-Agent': 'Honoka-Software-release-check/1.0'}

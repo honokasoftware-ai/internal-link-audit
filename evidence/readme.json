@@ -1,5 +1,5 @@
 {
- "passed": 29,
+ "passed": 28,
  "total": 29,
  "checks": [
   {
@@ -29,8 +29,8 @@
   },
   {
    "name": "R2 stable tag is the shipped version",
-   "got": "1.0.1",
-   "want": "1.0.1",
+   "got": "1.1.0",
+   "want": "1.1.0",
    "ok": true,
    "why": "a stable tag that is not the version in the file ships the wrong code"
   },
@@ -220,8 +220,8 @@
   },
   {
    "name": "R20 text domain matches the slug",
-   "got": "internal-link-audit",
-   "want": "internal-link-audit",
+   "got": "honoka-internal-link-audit",
+   "want": "honoka-internal-link-audit",
    "ok": true,
    "why": "translations load by slug on WordPress.org"
   },
@@ -249,14 +249,14 @@
   {
    "name": "R26 the zip carries the required files",
    "got": [
-    "internal-link-audit.php",
-    "languages/internal-link-audit.pot",
+    "honoka-internal-link-audit.php",
+    "languages/honoka-internal-link-audit.pot",
     "readme.txt",
     "uninstall.php"
    ],
    "want": [
-    "internal-link-audit.php",
-    "languages/internal-link-audit.pot",
+    "honoka-internal-link-audit.php",
+    "languages/honoka-internal-link-audit.pot",
     "readme.txt",
     "uninstall.php"
    ],
@@ -280,12 +280,12 @@
     false,
     false,
     200,
-    "919fc533e76ac036c73c5c4336d2116f2cf2d928cf074c8e927652b459f3c779",
-    "v1.0.1",
+    "12b50bb909bfd76ba7fd69439490875f727491f836d94fec4004778fc3428b8b",
+    "v1.1.0",
     200,
     true
    ],
-   "ok": true,
+   "ok": false,
    "why": "the readme tells people to install from the releases page; evidence/release_asset.json has to show a logged out download of that exact zip, from a published release whose tag serves the same four files"
   },
   {

@@ -1,10 +1,10 @@
-=== Internal Link Audit ===
+=== Honoka Internal Link Audit ===
 Contributors: honokasoftware
 Tags: internal links, orphaned posts, image alt, accessibility, audit
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ Three things about a blog are invisible while you work on one post at a time:
 2. **Images with no alt attribute.** Not `alt=""`, which is the correct markup for a decorative image, but images with no alt attribute at all.
 3. **How many internal links each post has**, and which posts have none going out.
 
-This plugin reads your published posts and puts those three numbers on one screen under **Tools -> Internal Link Audit**, with the list of which posts they are.
+This plugin reads your published posts and puts those three numbers on one screen under **Tools -> Honoka Internal Link Audit**, with the list of which posts they are.
 
 **It is read only.** It never edits, inserts or deletes a post, a page, an option set by anything else, or a file. There is nothing to undo.
 
@@ -46,7 +46,7 @@ There is no paid tier, no trial, no locked feature and no upsell. This is the wh
 
 1. Install through **Plugins -> Add New**, or upload the folder to `wp-content/plugins/`.
 2. Activate it.
-3. Open **Tools -> Internal Link Audit** and press **Run the scan**.
+3. Open **Tools -> Honoka Internal Link Audit** and press **Run the scan**.
 
 The scan reads 100 posts per request and continues when you press the button again, so it does not have to finish inside one page load.
 
@@ -78,9 +78,13 @@ No. Markup that a plugin or a theme appends to every post when it is displayed i
 
 == Screenshots ==
 
-1. Tools -> Internal Link Audit after a scan: the summary of six figures and the list of posts nothing links to.
+1. Tools -> Honoka Internal Link Audit after a scan: the summary of six figures and the list of posts nothing links to.
 
 == Changelog ==
+
+= 1.1.0 =
+* Changed: the plugin is now called Honoka Internal Link Audit. The old name was a plain description of the function and the same words appear inside the name of an existing plugin, so it was not distinctive enough for the directory. Nothing about what the plugin does has changed.
+* Changed: the text domain is now `honoka-internal-link-audit`, which is what translations load by.
 
 = 1.0.1 =
 * Fixed: content that another plugin appends through the `the_content` filter, such as a related posts box, was counted as part of the post. On a site with such a plugin every figure was too high and an orphaned post could look as though something linked to it.

@@ -23,7 +23,7 @@ import sys
 import tempfile
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SLUG = 'internal-link-audit'
+SLUG = 'honoka-internal-link-audit'
 
 REQUIRED_HEADERS = ['Contributors', 'Tags', 'Requires at least', 'Tested up to',
                     'Requires PHP', 'Stable tag', 'License', 'License URI']
@@ -277,16 +277,34 @@ def run(root, verbose=True):
 
 
 # ----------------------------------------------------------------- sabotage
-def sab_stable_tag(root):
+def _bump_header(root, header, value):
+    """Rewrite one readme.txt header, reading the current value instead of naming it.
+
+    A sabotage that spells out today's version (`Stable tag: 1.0.0`) stops editing
+    anything the moment the version moves, and then reports MISSED for a reason that has
+    nothing to do with the check. 1.0.0 -> 1.0.1 did exactly that to S1 on 2026-10-04.
+    The runner now refuses a sabotage that changed no bytes, so this cannot go quiet
+    again, but deriving the value keeps the case working rather than merely failing loudly.
+    """
     p = os.path.join(root, 'plugin', 'readme.txt')
-    s = read(root, 'plugin', 'readme.txt').replace('Stable tag: 1.0.0', 'Stable tag: 1.1.0')
-    io.open(p, 'w', encoding='utf-8').write(s)
+    s = read(root, 'plugin', 'readme.txt')
+    out, done = [], False
+    for line in s.split('\n'):
+        if not done and line.startswith(header + ':'):
+            line, done = '%s: %s' % (header, value), True
+        out.append(line)
+    if not done:
+        raise AssertionError('readme.txt has no %s header to sabotage' % header)
+    io.open(p, 'w', encoding='utf-8').write('\n'.join(out))
+
+
+def sab_stable_tag(root):
+    sab_tested_up.__doc__   # keep the pair together for readers
+    _bump_header(root, 'Stable tag', '1.1.0')
 
 
 def sab_tested_up(root):
-    p = os.path.join(root, 'plugin', 'readme.txt')
-    s = read(root, 'plugin', 'readme.txt').replace('Tested up to: 7.1', 'Tested up to: 9.9')
-    io.open(p, 'w', encoding='utf-8').write(s)
+    _bump_header(root, 'Tested up to', '9.9')
 
 
 def sab_long_short_desc(root):
@@ -338,8 +356,8 @@ def sab_new_untranslated(root):
     """A new screen string that was added after the pot was last generated."""
     p = os.path.join(root, 'plugin', '%s.php' % SLUG)
     s = read(root, 'plugin', '%s.php' % SLUG).replace(
-        "echo '<h2>' . esc_html__( 'Summary', 'internal-link-audit' ) . '</h2>",
-        "echo '<p>' . esc_html__( 'A brand new sentence nobody translated.', 'internal-link-audit' ) . '</p>';\n\techo '<h2>' . esc_html__( 'Summary', 'internal-link-audit' ) . '</h2>")
+        "echo '<h2>' . esc_html__( 'Summary', 'honoka-internal-link-audit' ) . '</h2>",
+        "echo '<p>' . esc_html__( 'A brand new sentence nobody translated.', 'honoka-internal-link-audit' ) . '</p>';\n\techo '<h2>' . esc_html__( 'Summary', 'honoka-internal-link-audit' ) . '</h2>")
     io.open(p, 'w', encoding='utf-8').write(s)
 
 
@@ -471,21 +489,48 @@ SABOTAGES = [
 ]
 
 
+def tree_digest(root):
+    """A hash of every file under root, so "did the sabotage edit anything" is a fact."""
+    import hashlib
+    h = hashlib.sha256()
+    for dirpath, dirnames, filenames in os.walk(root):
+        dirnames[:] = sorted(d for d in dirnames if d != '__pycache__')
+        for fn in sorted(filenames):
+            full = os.path.join(dirpath, fn)
+            h.update(os.path.relpath(full, root).encode('utf-8'))
+            with io.open(full, 'rb') as f:
+                h.update(f.read())
+    return h.hexdigest()
+
+
 def sabotage():
     base = run(HERE, verbose=False)
     if base.failed():
         print('refusing to measure teeth: the real tree already fails %s' % base.failed())
         return 2
-    out, caught = [], 0
+    out, caught, noop = [], 0, 0
     for name, fn, expect in SABOTAGES + [('S10 no-op rewrite', sab_noop, [])]:
         tmp = tempfile.mkdtemp(prefix='ilaudit-readme-')
         root = os.path.join(tmp, 'p')
         shutil.copytree(HERE, root, ignore=shutil.ignore_patterns('__pycache__', 'dist'))
         try:
+            before = tree_digest(root)
             fn(root)
+            moved = tree_digest(root) != before
             failed = run(root, verbose=False).failed()
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
+        if not moved:
+            # A sabotage that edits nothing proves nothing, in either direction: it would
+            # read as MISSED for a broken case and as QUIET for the control. Counting it
+            # as a result is how a hollow case hides. 2026-10-04: S1 spelled out
+            # 'Stable tag: 1.0.0' and went quiet when the plugin became 1.0.1, while the
+            # readme went on claiming 19 / 19.
+            out.append({'case': name, 'failed': failed, 'expected': expect,
+                        'verdict': 'NO-OP: the sabotage changed no bytes'})
+            print('%-28s %-24s failed=%s' % (name, 'NO-OP', failed))
+            noop += 1
+            continue
         if expect:
             hit = sorted(set(failed) & set(expect)) == sorted(set(expect))
             verdict = ('CAUGHT' if sorted(failed) == sorted(expect) else
@@ -495,11 +540,13 @@ def sabotage():
             verdict = 'QUIET' if not failed else 'NOISE: a no-op made %s fail' % failed
         out.append({'case': name, 'failed': failed, 'expected': expect, 'verdict': verdict})
         print('%-28s %-24s failed=%s' % (name, verdict, failed))
-    print('caught %d/%d' % (caught, len(SABOTAGES)))
+    print('caught %d/%d%s' % (caught, len(SABOTAGES),
+                              '   NO-OP %d (hollow cases: fix them)' % noop if noop else ''))
     with io.open(os.path.join(HERE, 'evidence', 'readme_teeth.json'), 'w', encoding='utf-8') as f:
-        json.dump({'sabotages': len(SABOTAGES), 'caught': caught, 'results': out}, f,
-                  ensure_ascii=False, indent=1)
-    return 0 if caught == len(SABOTAGES) and not out[-1]['failed'] else 1
+        json.dump({'sabotages': len(SABOTAGES), 'caught': caught, 'no_op': noop,
+                   'results': out}, f, ensure_ascii=False, indent=1)
+    return 0 if (caught == len(SABOTAGES) and not noop
+                 and out[-1]['verdict'] == 'QUIET') else 1
 
 
 def main():

@@ -1,17 +1,17 @@
 <?php
 /**
- * Plugin Name:       Internal Link Audit
+ * Plugin Name:       Honoka Internal Link Audit
  * Plugin URI:        https://github.com/honokasoftware-ai/internal-link-audit
  * Description:       Read-only report of three things you cannot see one post at a time: published posts that no other post links to, images with no alt text, and how many internal links each post has. It never changes your content.
- * Version:           1.0.1
+ * Version:           1.1.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Honoka Software
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       internal-link-audit
+ * Text Domain:       honoka-internal-link-audit
  *
- * Internal Link Audit is free software: you can redistribute it and/or modify it under
+ * Honoka Internal Link Audit is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 2 of the License, or (at your option) any later version.
  *
@@ -32,17 +32,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'ILAUDIT_VERSION', '1.0.1' );
 define( 'ILAUDIT_STATE', 'ilaudit_state' );   // scan in progress / finished state
-define( 'ILAUDIT_SLUG', 'internal-link-audit' );
+define( 'ILAUDIT_SLUG', 'honoka-internal-link-audit' );
 define( 'ILAUDIT_MAX_POSTS', 5000 );          // hard ceiling, see readme.txt FAQ
 define( 'ILAUDIT_BATCH', 100 );               // posts handled per request
 
 /**
- * Register the one admin screen. Tools -> Internal Link Audit.
+ * Register the one admin screen. Tools -> Honoka Internal Link Audit.
  */
 function ilaudit_menu() {
 	add_management_page(
-		__( 'Internal Link Audit', 'internal-link-audit' ),
-		__( 'Internal Link Audit', 'internal-link-audit' ),
+		__( 'Honoka Internal Link Audit', 'honoka-internal-link-audit' ),
+		__( 'Honoka Internal Link Audit', 'honoka-internal-link-audit' ),
 		'manage_options',
 		ILAUDIT_SLUG,
 		'ilaudit_render'
@@ -398,7 +398,7 @@ function ilaudit_summary( $state ) {
  */
 function ilaudit_render() {
 	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_die( esc_html__( 'You do not have permission to view this report.', 'internal-link-audit' ) );
+		wp_die( esc_html__( 'You do not have permission to view this report.', 'honoka-internal-link-audit' ) );
 	}
 	$action = isset( $_POST['ilaudit_action'] ) ? sanitize_key( wp_unslash( $_POST['ilaudit_action'] ) ) : '';
 	if ( '' !== $action ) {
@@ -418,8 +418,8 @@ function ilaudit_render() {
 	$running = ( $total > 0 && $state['done'] < $total );
 
 	echo '<div class="wrap">';
-	echo '<h1>' . esc_html__( 'Internal Link Audit', 'internal-link-audit' ) . '</h1>';
-	echo '<p>' . esc_html__( 'This report only reads your posts. It never edits, inserts or deletes anything, and it sends nothing anywhere.', 'internal-link-audit' ) . '</p>';
+	echo '<h1>' . esc_html__( 'Honoka Internal Link Audit', 'honoka-internal-link-audit' ) . '</h1>';
+	echo '<p>' . esc_html__( 'This report only reads your posts. It never edits, inserts or deletes anything, and it sends nothing anywhere.', 'honoka-internal-link-audit' ) . '</p>';
 
 	echo '<form method="post">';
 	wp_nonce_field( 'ilaudit_scan' );
@@ -429,17 +429,17 @@ function ilaudit_render() {
 			esc_html(
 				sprintf(
 					/* translators: 1: posts measured, 2: posts found */
-					__( 'Scan in progress: %1$d of %2$d posts measured.', 'internal-link-audit' ),
+					__( 'Scan in progress: %1$d of %2$d posts measured.', 'honoka-internal-link-audit' ),
 					(int) $state['done'],
 					$total
 				)
 			)
 		);
-		submit_button( __( 'Measure the next batch', 'internal-link-audit' ), 'primary', 'ilaudit_go', false );
+		submit_button( __( 'Measure the next batch', 'honoka-internal-link-audit' ), 'primary', 'ilaudit_go', false );
 		echo ' <input type="hidden" name="ilaudit_action" value="continue" />';
 	} else {
 		submit_button(
-			0 === $total ? __( 'Run the scan', 'internal-link-audit' ) : __( 'Run the scan again', 'internal-link-audit' ),
+			0 === $total ? __( 'Run the scan', 'honoka-internal-link-audit' ) : __( 'Run the scan again', 'honoka-internal-link-audit' ),
 			'primary',
 			'ilaudit_go',
 			false
@@ -449,7 +449,7 @@ function ilaudit_render() {
 	echo '</form>';
 
 	if ( 0 === $total ) {
-		echo '<p>' . esc_html__( 'No scan has been run yet.', 'internal-link-audit' ) . '</p></div>';
+		echo '<p>' . esc_html__( 'No scan has been run yet.', 'honoka-internal-link-audit' ) . '</p></div>';
 		return;
 	}
 
@@ -457,26 +457,26 @@ function ilaudit_render() {
 		echo '<p><em>' . esc_html(
 			sprintf(
 				/* translators: 1: ceiling on the number of posts, 2: the same ceiling */
-				__( 'This site has more than %1$d published posts. Only the oldest %2$d were read, so the orphan list is incomplete.', 'internal-link-audit' ),
+				__( 'This site has more than %1$d published posts. Only the oldest %2$d were read, so the orphan list is incomplete.', 'honoka-internal-link-audit' ),
 				ILAUDIT_MAX_POSTS,
 				ILAUDIT_MAX_POSTS
 			)
 		) . '</em></p>';
 	}
 
-	echo '<h2>' . esc_html__( 'Summary', 'internal-link-audit' ) . '</h2><table class="widefat striped" style="max-width:40em"><tbody>';
+	echo '<h2>' . esc_html__( 'Summary', 'honoka-internal-link-audit' ) . '</h2><table class="widefat striped" style="max-width:40em"><tbody>';
 	$rows = array(
-		array( __( 'Published posts read', 'internal-link-audit' ), number_format_i18n( $summary['posts'] ) ),
+		array( __( 'Published posts read', 'honoka-internal-link-audit' ), number_format_i18n( $summary['posts'] ) ),
 		array(
-			__( 'Posts no other post links to', 'internal-link-audit' ),
+			__( 'Posts no other post links to', 'honoka-internal-link-audit' ),
 			$summary['complete']
 				? number_format_i18n( $summary['orphan_count'] )
-				: __( 'available when the scan finishes', 'internal-link-audit' ),
+				: __( 'available when the scan finishes', 'honoka-internal-link-audit' ),
 		),
-		array( __( 'Images with no alt attribute', 'internal-link-audit' ), number_format_i18n( $summary['images_no_alt'] ) . ' / ' . number_format_i18n( $summary['images'] ) ),
-		array( __( 'Internal links found', 'internal-link-audit' ), number_format_i18n( $summary['internal_sum'] ) ),
-		array( __( 'Internal links per post (median)', 'internal-link-audit' ), number_format_i18n( $summary['internal_med'], 1 ) ),
-		array( __( 'Posts with no internal link out', 'internal-link-audit' ), number_format_i18n( $summary['zero_internal'] ) ),
+		array( __( 'Images with no alt attribute', 'honoka-internal-link-audit' ), number_format_i18n( $summary['images_no_alt'] ) . ' / ' . number_format_i18n( $summary['images'] ) ),
+		array( __( 'Internal links found', 'honoka-internal-link-audit' ), number_format_i18n( $summary['internal_sum'] ) ),
+		array( __( 'Internal links per post (median)', 'honoka-internal-link-audit' ), number_format_i18n( $summary['internal_med'], 1 ) ),
+		array( __( 'Posts with no internal link out', 'honoka-internal-link-audit' ), number_format_i18n( $summary['zero_internal'] ) ),
 	);
 	foreach ( $rows as $r ) {
 		echo '<tr><td>' . esc_html( $r[0] ) . '</td><td><strong>' . esc_html( $r[1] ) . '</strong></td></tr>';
@@ -484,15 +484,15 @@ function ilaudit_render() {
 	echo '</tbody></table>';
 
 	if ( $summary['complete'] ) {
-		echo '<h2>' . esc_html__( 'Posts no other post links to', 'internal-link-audit' ) . '</h2>';
+		echo '<h2>' . esc_html__( 'Posts no other post links to', 'honoka-internal-link-audit' ) . '</h2>';
 		if ( 0 === $summary['orphan_count'] ) {
-			echo '<p>' . esc_html__( 'Every post is linked to from at least one other post.', 'internal-link-audit' ) . '</p>';
+			echo '<p>' . esc_html__( 'Every post is linked to from at least one other post.', 'honoka-internal-link-audit' ) . '</p>';
 		} else {
 			echo '<table class="widefat striped"><thead><tr>';
-			echo '<th>' . esc_html__( 'Post', 'internal-link-audit' ) . '</th>';
-			echo '<th>' . esc_html__( 'Published', 'internal-link-audit' ) . '</th>';
-			echo '<th>' . esc_html__( 'Internal links out', 'internal-link-audit' ) . '</th>';
-			echo '<th>' . esc_html__( 'Images with no alt', 'internal-link-audit' ) . '</th>';
+			echo '<th>' . esc_html__( 'Post', 'honoka-internal-link-audit' ) . '</th>';
+			echo '<th>' . esc_html__( 'Published', 'honoka-internal-link-audit' ) . '</th>';
+			echo '<th>' . esc_html__( 'Internal links out', 'honoka-internal-link-audit' ) . '</th>';
+			echo '<th>' . esc_html__( 'Images with no alt', 'honoka-internal-link-audit' ) . '</th>';
 			echo '</tr></thead><tbody>';
 			foreach ( $summary['orphans'] as $id ) {
 				$row = $state['per'][ (string) $id ];
@@ -509,13 +509,13 @@ function ilaudit_render() {
 		}
 	}
 
-	echo '<h2>' . esc_html__( 'How these numbers are counted', 'internal-link-audit' ) . '</h2><ul>';
+	echo '<h2>' . esc_html__( 'How these numbers are counted', 'honoka-internal-link-audit' ) . '</h2><ul>';
 	$notes = array(
-		__( 'Only published posts are read. Pages, drafts, attachments and other post types are left out.', 'internal-link-audit' ),
-		__( 'Each post is measured after the content filters run, so shortcodes and blocks are counted the way a visitor sees them. Text inside HTML comments is not counted, because it is not on the page.', 'internal-link-audit' ),
-		__( 'An internal link is a link to this same site. Links starting with tel:, mailto: or # are not internal links. A link from a post to itself does not count as a link to it.', 'internal-link-audit' ),
-		__( 'alt="" is correct markup for a decorative image and is not reported as missing. Only an img tag with no alt attribute at all is.', 'internal-link-audit' ),
-		__( 'Link targets are resolved with WordPress\' own url_to_postid(), so a link written before a slug or category change still counts for the post it now points to.', 'internal-link-audit' ),
+		__( 'Only published posts are read. Pages, drafts, attachments and other post types are left out.', 'honoka-internal-link-audit' ),
+		__( 'Each post is measured after the content filters run, so shortcodes and blocks are counted the way a visitor sees them. Text inside HTML comments is not counted, because it is not on the page.', 'honoka-internal-link-audit' ),
+		__( 'An internal link is a link to this same site. Links starting with tel:, mailto: or # are not internal links. A link from a post to itself does not count as a link to it.', 'honoka-internal-link-audit' ),
+		__( 'alt="" is correct markup for a decorative image and is not reported as missing. Only an img tag with no alt attribute at all is.', 'honoka-internal-link-audit' ),
+		__( 'Link targets are resolved with WordPress\' own url_to_postid(), so a link written before a slug or category change still counts for the post it now points to.', 'honoka-internal-link-audit' ),
 	);
 	foreach ( $notes as $note ) {
 		echo '<li>' . esc_html( $note ) . '</li>';
@@ -525,7 +525,7 @@ function ilaudit_render() {
 	echo '<form method="post">';
 	wp_nonce_field( 'ilaudit_scan' );
 	echo '<input type="hidden" name="ilaudit_action" value="forget" />';
-	submit_button( __( 'Delete the stored report', 'internal-link-audit' ), 'delete', 'ilaudit_forget', false );
+	submit_button( __( 'Delete the stored report', 'honoka-internal-link-audit' ), 'delete', 'ilaudit_forget', false );
 	echo '</form>';
 	echo '</div>';
 }
