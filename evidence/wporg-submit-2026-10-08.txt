@@ -1,0 +1,123 @@
+Howdy, honokasoftware
+Skip to content
+Showcase
+Plugins
+Themes
+Hosting
+News
+Resources
+About
+Swag ↗︎
+Get WordPress
+
+Plugin Directory
+
+Submit a plugin
+My favorites
+Add your plugin
+
+Before you submit your plugin, we ask you to review our Guidelines and read the Frequently Asked Questions. A brief selection of common questions is available below the form.
+
+Thank you for uploading Honoka Internal Link Audit to the WordPress Plugin Directory. Your plugin has been given the initial slug of honoka-internal-link-audit, however that is subject to change based on the results of your code review. If this slug is incorrect, please change it below. Remember, a plugin slug cannot be changed once your plugin is approved.
+
+We’ve sent you an email verifying this submission. Make sure you set all emails from wordpress.org to never go to spam (i.e. via email filters or approval lists). That will ensure you won’t miss any of our messages.
+
+If there are any errors in your submission, such as having submitted via the wrong account, please don’t resubmit! Instead, email us as soon as possible (you can reply to the automated email we sent you). We can correct most issues before approval.
+
+While you’re waiting on your review, please take the time to read the developer guidelines and the developer FAQ as they will address most questions.
+
+Note: Reviews are currently in English only. We apologize for the inconvenience.Results of Automated Plugin Scanning: Pass
+
+Note: While the automated plugin scan is based on the Plugin Review Guidelines, it is not a complete review. A successful result from the scan does not guarantee that the plugin will be approved, only that it is sufficient to be reviewed. All submitted plugins are checked manually to ensure they meet security and guideline standards before approval.
+
+Currently there are 255 plugins awaiting their first review.
+
+All new submissions received before October 3, 2026 have been sent an initial response by email.
+
+You have 1 plugin that has been recently submitted but not yet reviewed. Please wait for your plugin to be reviewed and approved before submitting another.
+
+Please review the Plugin Check results for your plugin, and fix any significant problems. This will help streamline the preview process and reduce delays by ensuring your plugin already meets the required standards when the Plugins Team examines it.
+
+Honoka Internal Link Audit
+Submitted on: October 8, 2026
+Review status: Awaiting Review — This plugin has not yet been reviewed.
+ Please be patient and wait for the review email. It will be sent to your email address, honokasoftware@gmail.com, with the subject line: “[WordPress Plugin Directory] Review in Progress: Honoka Internal Link Audit“.
+Be sure to check your spam folder, and consider adding plugins@wordpress.org to your email whitelist to ensure the message does not get missed.
+Current assigned slug: honoka-internal-link-audit change
+Upload updated "Honoka Internal Link Audit" plugin for review.
+Submitted files:
+Upload Date:	October 8, 2026
+File:	honoka-internal-link-audit-1.1.0.zip
+Version:	1.1.0
+Honoka Internal Link Audit 1.1.0. Read-only audit under Tools: lists posts no other post links to, images without alt text, and internal links per post (median shown). No front-end hooks, no outbound requests, no settings stored except a transient scan state, uninstall.php removes it. Tested on WordPress 6.0.3/PHP 7.4 and 7.1.2/PHP 8.3; Plugin Check 2.1.0 reports 0 findings. Name search: the directory has no plugin containing “Honoka”; related plugins found (OrphanPages, AP Link Audit, InternalLink Audit) use different names, and the brand prefix was added per Guideline 17 to keep ours distinct. Source: https://github.com/honokasoftware-ai/internal-link-audit (release v1.1.0 carries the same zip).
+Check with Plugin Check
+
+Once submitted, your plugin will be manually reviewed for any common errors as well as ensuring it complies with all the guidelines.
+
+Frequently Asked Questions
+How long will the review process take?
+
+This is in the Developer FAQ. It takes anywhere between 1 and 10 days. We attempt to review all plugins within 5 business days of submission, but the process takes as long as it takes, depending on the complexity of your plugin.
+
+How can I expedite my plugin review?
+
+Your plugin review cannot be prioritized over others, to help us approve your plugin sooner, please ensure that you have read the Security chapter of the Plugin Handbook.
+
+The most common reasons for not approving a plugin are:
+
+The plugin contains unescaped output: Learn about Escaping Data
+The plugin accepts unsanitized data: Learn about Sanitizing Data
+The plugin processes form data without a nonce: Learn about Nonces
+The plugin does not comply with the guidelines: Check out the guidelines
+
+If the code in your plugin falls into one of the above categories, your plugin will not be approved. The Plugins Team will refer you back to these Handbook pages, adding further delay to the review process.
+
+What will my plugin URL be?
+
+Your plugin’s URL will be populated based on the value of Plugin Name in your main plugin file (the one with the plugin headers). If you set yours as Plugin Name: Boaty McBoatface then your URL will be https://wordpress.org/plugins/boaty-mcboatface and your slug will be boaty-mcboatface for example. If there is an existing plugin with your name, then you will be boaty-mcboatface-2 and so on. It behaves exactly like WordPress post names.
+
+Once your plugin is approved, it cannot be renamed.
+
+I made a mistake in my plugin name. Should I update it?
+
+It depends on what you want to change. If you want to change the plugin display name you can update that by updating your plugin files in this page. If what you want to change is the permalink / slug of your plugin, you can do that ONCE before we begin with the review (if that’s available you’ll see a link to change it on this page).
+
+If you can no longer change the slug from this page, please contact us. If your plugin is already under review, simply reply to the review email. Otherwise, email us at plugins@wordpress.org. We can make the change as long as the plugin has not yet been approved.
+
+Why can’t I submit a plugin with certain display names?
+
+Certain plugin names are prohibited due to trademark abuse and to avoid confusion with other project names or plugins. Similarly, we prevent their use in plugin slugs entirely for your protection.
+
+About
+News
+Hosting
+Privacy
+Showcase
+Themes
+Plugins
+Patterns
+Learn
+Documentation
+Developers
+WordPress.tv ↗
+Get Involved
+Events
+Donate ↗
+Swag ↗
+WordPress.com ↗
+Matt ↗
+bbPress ↗
+BuddyPress ↗
+
+The WordPress® trademark is the intellectual property of the WordPress Foundation.
+
+Visit our X (formerly Twitter) account
+Visit our Bluesky account
+Visit our Mastodon account
+Visit our Threads account
+Visit our Facebook page
+Visit our Instagram account
+Visit our LinkedIn account
+Visit our TikTok account
+Visit our YouTube channel
+Visit our Tumblr account

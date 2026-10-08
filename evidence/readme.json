@@ -1,5 +1,5 @@
 {
- "passed": 28,
+ "passed": 29,
  "total": 29,
  "checks": [
   {
@@ -270,8 +270,8 @@
     false,
     false,
     200,
-    "919fc533e76ac036c73c5c4336d2116f2cf2d928cf074c8e927652b459f3c779",
-    "v1.0.1",
+    "12b50bb909bfd76ba7fd69439490875f727491f836d94fec4004778fc3428b8b",
+    "v1.1.0",
     200,
     true
    ],
@@ -285,7 +285,7 @@
     200,
     true
    ],
-   "ok": false,
+   "ok": true,
    "why": "the readme tells people to install from the releases page; evidence/release_asset.json has to show a logged out download of that exact zip, from a published release whose tag serves the same four files"
   },
   {

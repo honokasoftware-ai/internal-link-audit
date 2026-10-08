@@ -2,7 +2,7 @@
  "pcp_version": "2.1.0",
  "wp_version": "7.1.2",
  "php_version": "8.3.35",
- "command": "wp plugin check internal-link-audit --format=json --include-experimental --include-low-severity-errors --include-low-severity-warnings --slug=internal-link-audit",
+ "command": "wp plugin check honoka-internal-link-audit --format=json --include-experimental --include-low-severity-errors --include-low-severity-warnings --slug=honoka-internal-link-audit",
  "baseline_findings": 0,
  "proofs": [
   {

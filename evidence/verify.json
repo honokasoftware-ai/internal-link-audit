@@ -1,6 +1,6 @@
 {
- "wp": "7.1.2",
- "php": "8.3.35",
+ "wp": "6.0.3",
+ "php": "7.4.32",
  "plugin": "1.1.0",
  "rounds": 1,
  "passed": 26,
@@ -267,8 +267,8 @@
    }
   },
   "state_unchanged": true,
-  "state_before": "{\"version\":\"1.0.1\",\"ids\":[29,30,31,32,33,34,35],\"done\":7,\"per\":{\"29\":{\"internal\"",
-  "state_after": "{\"version\":\"1.0.1\",\"ids\":[29,30,31,32,33,34,35],\"done\":7,\"per\":{\"29\":{\"internal\"",
+  "state_before": "{\"version\":\"1.0.1\",\"ids\":[5,6,7,8,9,10,11],\"done\":7,\"per\":{\"5\":{\"internal\":2,\"im",
+  "state_after": "{\"version\":\"1.0.1\",\"ids\":[5,6,7,8,9,10,11],\"done\":7,\"per\":{\"5\":{\"internal\":2,\"im",
   "own_guard_rc": 1,
   "own_guard_said": [
    "plugin"
